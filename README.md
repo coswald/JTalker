@@ -35,6 +35,9 @@
 </p>
 
 ## JTalker
+
+[![Join the chat at https://gitter.im/coswaldJTalker/JTalker](https://badges.gitter.im/coswaldJTalker/JTalker.svg)](https://gitter.im/coswaldJTalker/JTalker?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 An implementation of a server/client application in Java. This started as an example application for a networking class. However, I wanted to expand on it and test a couple things out. The only real use for JTalker is as an example of a server/client text sender, and to be used concurrently with a packet sniffer such as <a href="http://wireshark.org">Wireshark</a>. 
 
 ## Getting Started
