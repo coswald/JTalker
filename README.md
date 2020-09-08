@@ -19,7 +19,7 @@
   <a href="https://travis-ci.org/github/coswald/JTalker"><img src="https://travis-ci.org/coswald/JTalker.svg?branch=master" alt="Travis CI"></a>
   <a href="https://coswald.github.io/JTalker/"><img src="https://img.shields.io/readthedocs/pip.svg" alt="Docs"></a>
   <a href="https://twitter.com/CovedW"><img src="https://img.shields.io/twitter/follow/covedw.svg?style=social" alt="Follow on Twitter"></a>
-  <a href="https://gitter.im/coswaldJTalker/"><img src="https://badges.gitter.im/coswald/JTalker.png" alt="Gitter"></a> -->
+  <a href="https://gitter.im/coswaldJTalker/"><img src="https://badges.gitter.im/coswald/JTalker.png" alt="Gitter"></a>
   <a href="https://saythanks.io/to/coswald%40uni.edu"><img src="https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg" alt="Say Thanks!"></a>
 </p>
 
