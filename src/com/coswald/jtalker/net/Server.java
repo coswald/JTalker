@@ -53,10 +53,12 @@ public class Server implements Closeable, Initializable, Runnable
    */
   public Server(int port)
   {
-    if(port < 0 || port > 65535)
+    if(port < ServerClientConstants.MIN_PORT_NUMBER ||
+       port > ServerClientConstants.MAX_PORT_NUMBER)
     {
-      throw new IllegalArgumentException("Port must be between 0 " +
-        "and 65535, inclusive!");
+      throw new IllegalArgumentException("Port must be between " +
+        ServerClientConstants.MIN_PORT_NUMBER +
+        " and " + ServerClientConstants.MAX_PORT_NUMBER + ", inclusive!");
     }
     this.port = port;
     this.running = false;
