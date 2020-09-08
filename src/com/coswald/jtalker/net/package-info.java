@@ -1,6 +1,10 @@
 /*
- * This file is part of JTalker.
+ * package-info.java
  * 
+ * Copyright 2020 Coved W. Oswald <coswald@uni.edu>
+ * 
+ * This file is part of JTalker.
+ *
  * JTalker is free software: you can redistribute it and/or modify it under the
  * terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
@@ -15,13 +19,10 @@
  * JTalker. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.coswald.net;
-
-public final class ServerClientConstants
-{
-  public static String EXIT_MESSAGE = "EXIT";
-  
-  public static int MAX_CLIENTS = 8;
-  
-  private ServerClientConstants() {}
-}
+/**
+ * 
+ * @author C. William Oswald
+ * @version 0.0.1
+ * @since JTalker 0.0.1
+ */
+package com.coswald.jtalker.net;

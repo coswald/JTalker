@@ -1,4 +1,8 @@
 /*
+ * Server.java
+ * 
+ * Copyright 2020 Coved W. Oswald <coswald@uni.edu>
+ * 
  * This file is part of JTalker.
  *
  * JTalker is free software: you can redistribute it and/or modify it under the
@@ -15,18 +19,17 @@
  * JTalker. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.coswald.net;
+package com.coswald.jtalker.net;
 
-import com.coswald.Initializable;
-import com.coswald.net.ClientInstance;
-import com.coswald.net.ServerOutputStream;
+import com.coswald.jtalker.Initializable;
+import com.coswald.jtalker.net.ClientInstance;
+import com.coswald.jtalker.net.ServerOutputStream;
 
 import java.io.Closeable;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
-import java.util.concurrent.ExecutorService; 
 import java.util.concurrent.Executors; 
 import java.util.concurrent.ThreadPoolExecutor;
 
@@ -44,6 +47,10 @@ public class Server implements Closeable, Initializable, Runnable
   private ServerOutputStream sos;
   private ThreadPoolExecutor threadPool; 
   
+  /**
+   * 
+   * @param port
+   */
   public Server(int port)
   {
     if(port < 0 || port > 65535)
@@ -67,11 +74,17 @@ public class Server implements Closeable, Initializable, Runnable
         {
           close();
         }
-        catch(IOException i) { }
+        catch(IOException i)
+        {
+          System.out.println("Could not initialize server!");
+        }
       }
     });
   }
   
+  /**
+   * 
+   */
   @Override
   public void init()
   {
@@ -88,6 +101,9 @@ public class Server implements Closeable, Initializable, Runnable
     }
   }
   
+  /**
+   * 
+   */
   @Override
   public void run()
   {
@@ -101,7 +117,7 @@ public class Server implements Closeable, Initializable, Runnable
       catch(SocketException s)
       {
         System.out.println("Stopping Server");
-        System.exit(0);
+        //System.exit(0);
       }
       catch(IOException i)
       {
@@ -116,6 +132,9 @@ public class Server implements Closeable, Initializable, Runnable
     }
   }
   
+  /**
+   * 
+   */
   @Override
   public void close() throws IOException
   {

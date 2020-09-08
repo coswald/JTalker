@@ -1,4 +1,8 @@
 /*
+ * Client.java
+ * 
+ * Copyright 2020 Coved W. Oswald <coswald@uni.edu>
+ * 
  * This file is part of JTalker.
  *
  * JTalker is free software: you can redistribute it and/or modify it under the
@@ -15,10 +19,10 @@
  * JTalker. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.coswald.net;
+package com.coswald.jtalker.net;
 
-import com.coswald.Initializable;
-import com.coswald.net.ServerClientConstants;
+import com.coswald.jtalker.Initializable;
+import com.coswald.jtalker.net.ServerClientConstants;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -42,12 +46,20 @@ public class Client implements Closeable, Initializable, Runnable
   private DataOutputStream output;
   private boolean running;
   
+  /**
+   * 
+   * @param identifier
+   * @param host
+   * @param port
+   */
   public Client(String identifier, String host, int port)
   {
-    if(port < 0 || port > 65535)
+    if(port < ServerClientConstants.MIN_PORT_NUMBER ||
+       port > ServerClientConstants.MAX_PORT_NUMBER)
     {
-      throw new IllegalArgumentException("Port must be between 0 " +
-        "and 65535, inclusive!");
+      throw new IllegalArgumentException("Port must be between " +
+        ServerClientConstants.MIN_PORT_NUMBER +
+        " and " + ServerClientConstants.MAX_PORT_NUMBER + ", inclusive!");
     }
     this.identifier = identifier;
     this.host = host;
@@ -55,6 +67,9 @@ public class Client implements Closeable, Initializable, Runnable
     this.running = false;
   }
   
+  /**
+   * 
+   */
   @Override
   public void init()
   {
@@ -89,7 +104,7 @@ public class Client implements Closeable, Initializable, Runnable
             catch(SocketException s)
             {
               System.out.println("Connection has been lost");
-              System.exit(0);
+              //System.exit(0);
             }
             catch(IOException i)
             {
@@ -105,15 +120,18 @@ public class Client implements Closeable, Initializable, Runnable
     catch(UnknownHostException u)
     {
       System.out.println("Unknown Host!");
-      System.exit(1);
+      //System.exit(1);
     }
     catch(IOException i)
     {
       System.out.println("Error while initializing IO Stream!");
-      System.exit(2);
+      //System.exit(2);
     }
   }
   
+  /**
+   * 
+   */
   @Override
   public void run()
   {
@@ -134,6 +152,10 @@ public class Client implements Closeable, Initializable, Runnable
     }
   }
   
+  /**
+   * 
+   * @throws IOException
+   */
   @Override
   public void close() throws IOException
   {
@@ -143,16 +165,28 @@ public class Client implements Closeable, Initializable, Runnable
     this.socket.close(); //Any one of these lines may throw an IOException
   }
   
+  /**
+   * 
+   * @return 
+   */
   public String getHost()
   {
     return this.host;
   }
   
+  /**
+   * 
+   * @return
+   */
   public String getID()
   {
     return this.identifier;
   }
   
+  /**
+   * 
+   * @return
+   */
   public int getPort()
   {
     return this.port;

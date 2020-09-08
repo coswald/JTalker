@@ -1,4 +1,8 @@
 /*
+ * ClientInstance.java
+ * 
+ * Copyright 2020 Coved W. Oswald <coswald@uni.edu>
+ * 
  * This file is part of JTalker.
  *
  * JTalker is free software: you can redistribute it and/or modify it under the
@@ -15,11 +19,11 @@
  * JTalker. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.coswald.net;
+package com.coswald.jtalker.net;
 
-import com.coswald.Initializable;
-import com.coswald.net.ServerClientConstants;
-import com.coswald.net.ServerOutputStream;
+import com.coswald.jtalker.Initializable;
+import com.coswald.jtalker.net.ServerClientConstants;
+import com.coswald.jtalker.net.ServerOutputStream;
 
 import java.io.BufferedInputStream;
 import java.io.Closeable;
@@ -45,6 +49,11 @@ public class ClientInstance implements Closeable, Initializable, Runnable
   private String identifier;
   private boolean goodToRun;
   
+  /**
+   * 
+   * @param socket
+   * @param output
+   */
   public ClientInstance(Socket socket, ServerOutputStream output)
   {
     this.socket = socket;
@@ -52,6 +61,9 @@ public class ClientInstance implements Closeable, Initializable, Runnable
     this.goodToRun = false;
   }
   
+  /**
+   * 
+   */
   @Override
   public void init()
   {
@@ -73,6 +85,9 @@ public class ClientInstance implements Closeable, Initializable, Runnable
     this.goodToRun = true;
   }
   
+  /**
+   * 
+   */
   @Override
   public void run()
   {
@@ -102,6 +117,10 @@ public class ClientInstance implements Closeable, Initializable, Runnable
     }
   }
   
+  /**
+   * 
+   * @throws IOException
+   */
   @Override
   public void close() throws IOException
   {

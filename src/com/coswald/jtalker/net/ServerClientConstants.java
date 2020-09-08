@@ -1,4 +1,8 @@
 /*
+ * Initializable.java
+ * 
+ * Copyright 2020 Coved W. Oswald <coswald@uni.edu>
+ * 
  * This file is part of JTalker.
  *
  * JTalker is free software: you can redistribute it and/or modify it under the
@@ -15,16 +19,35 @@
  * JTalker. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.coswald.net.test;
+package com.coswald.jtalker.net;
 
-import com.coswald.net.Server;
-
-public class ServerTest
+/**
+ * 
+ * @author C. William Oswald
+ * @version 0.0.1
+ * @since JTalker 0.0.1
+ */
+public final class ServerClientConstants
 {
-  public static void main(String... args)
-  {
-    Server s = new Server(5000);
-    s.init();
-    (new Thread(s)).run();
-  }
+  /**
+   * 
+   */
+  public static final String EXIT_MESSAGE = "EXIT";
+  
+  /**
+   * 
+   */
+  public static final int MAX_CLIENTS = 8;
+  
+  /**
+   * 
+   */
+  public static final int MAX_PORT_NUMBER = 65535;
+  
+  /**
+   * 
+   */
+  public static final int MIN_PORT_NUMBER = 0;
+  
+  private ServerClientConstants() {}
 }

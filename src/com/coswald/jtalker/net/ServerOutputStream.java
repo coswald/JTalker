@@ -15,7 +15,7 @@
  * JTalker. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.coswald.net;
+package com.coswald.jtalker.net;
 
 import java.io.DataOutput;
 import java.io.DataOutputStream;
@@ -35,6 +35,10 @@ public class ServerOutputStream extends FilterOutputStream implements DataOutput
 {
   private ArrayList<DataOutputStream> outputStreams;
   
+  /**
+   * 
+   * @param out
+   */
   public ServerOutputStream(OutputStream out)
   {
     super(out);
@@ -42,6 +46,10 @@ public class ServerOutputStream extends FilterOutputStream implements DataOutput
     this.outputStreams.add(new DataOutputStream(out));
   }
   
+  /**
+   * 
+   * @throws IOException
+   */
   @Override
   public void flush() throws IOException
   {
@@ -51,6 +59,10 @@ public class ServerOutputStream extends FilterOutputStream implements DataOutput
     }
   }
   
+  /**
+   * 
+   * @return
+   */
   public int size()
   {
     int size = 0;
@@ -60,7 +72,14 @@ public class ServerOutputStream extends FilterOutputStream implements DataOutput
     }
     return size;
   }
-
+  
+  /**
+   * 
+   * @param b
+   * @param off
+   * @param len
+   * @throws IOException
+   */
   @Override
   public void write(byte[] b, int off, int len) throws IOException
   {
@@ -70,6 +89,10 @@ public class ServerOutputStream extends FilterOutputStream implements DataOutput
     }
   }  
   
+  /**
+   * 
+   * @param b
+   */
   @Override
   public void write(int b) throws IOException
   {
@@ -79,6 +102,11 @@ public class ServerOutputStream extends FilterOutputStream implements DataOutput
     }
   }
   
+  /**
+   * 
+   * @param v
+   * @throws IOException
+   */
   @Override
   public void writeBoolean(boolean v) throws IOException
   {
@@ -87,7 +115,12 @@ public class ServerOutputStream extends FilterOutputStream implements DataOutput
       dos.writeBoolean(v);
     }
   }
-
+  
+  /**
+   * 
+   * @param v
+   * @throws IOException
+   */
   @Override
   public void writeByte(int v) throws IOException
   {
@@ -97,6 +130,11 @@ public class ServerOutputStream extends FilterOutputStream implements DataOutput
     }
   }
   
+  /**
+   * 
+   * @param s
+   * @throws IOException
+   */
   @Override
   public void writeBytes(String s) throws IOException
   {
@@ -106,6 +144,11 @@ public class ServerOutputStream extends FilterOutputStream implements DataOutput
     }
   }
 
+  /**
+   * 
+   * @param v
+   * @throws IOException
+   */
   @Override
   public void writeChar(int v) throws IOException
   {
@@ -115,6 +158,11 @@ public class ServerOutputStream extends FilterOutputStream implements DataOutput
     }
   }
 
+  /**
+   * 
+   * @param s
+   * @throws IOException
+   */
   @Override
   public void writeChars(String s) throws IOException
   {
@@ -124,6 +172,11 @@ public class ServerOutputStream extends FilterOutputStream implements DataOutput
     }
   }
 
+  /**
+   * 
+   * @param v
+   * @throws IOException
+   */
   @Override
   public void writeDouble(double v) throws IOException
   {
@@ -132,7 +185,12 @@ public class ServerOutputStream extends FilterOutputStream implements DataOutput
       dos.writeDouble(v);
     }
   }
-  
+
+  /**
+   * 
+   * @param v
+   * @throws IOException
+   */
   @Override
   public void writeFloat(float v) throws IOException
   {
@@ -141,7 +199,12 @@ public class ServerOutputStream extends FilterOutputStream implements DataOutput
       dos.writeFloat(v);
     }
   }
-  
+
+  /**
+   * 
+   * @param v
+   * @throws IOException
+   */
   @Override
   public void writeInt(int v) throws IOException
   {
@@ -150,7 +213,12 @@ public class ServerOutputStream extends FilterOutputStream implements DataOutput
       dos.writeInt(v);
     }
   }
-  
+
+  /**
+   * 
+   * @param v
+   * @throws IOException
+   */
   @Override
   public void writeLong(long v) throws IOException
   {
@@ -160,6 +228,11 @@ public class ServerOutputStream extends FilterOutputStream implements DataOutput
     }
   }
 
+  /**
+   * 
+   * @param v
+   * @throws IOException
+   */
   @Override
   public void writeShort(int v) throws IOException
   {
@@ -169,6 +242,11 @@ public class ServerOutputStream extends FilterOutputStream implements DataOutput
     }
   }
 
+  /**
+   * 
+   * @param line
+   * @throws IOException
+   */
   @Override
   public void writeUTF(String line) throws IOException
   {
@@ -178,6 +256,10 @@ public class ServerOutputStream extends FilterOutputStream implements DataOutput
     }
   }
   
+  /**
+   * 
+   * @throws IOException
+   */
   @Override
   public void close() throws IOException
   {
@@ -187,11 +269,19 @@ public class ServerOutputStream extends FilterOutputStream implements DataOutput
     }
   }
   
+  /**
+   * 
+   * @param dos
+   */
   public void add(DataOutputStream dos)
   {
     this.outputStreams.add(dos);
   }
   
+  /**
+   * 
+   * @param dos
+   */
   public void remove(DataOutputStream dos)
   {
     this.outputStreams.remove(dos);

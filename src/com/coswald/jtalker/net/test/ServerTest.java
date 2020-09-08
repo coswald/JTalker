@@ -15,21 +15,16 @@
  * JTalker. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.coswald.net.test;
+package com.coswald.jtalker.net.test;
 
-import com.coswald.net.Client;
+import com.coswald.jtalker.net.Server;
 
-import java.util.Scanner;
-
-public class ClientTest
+public class ServerTest
 {
   public static void main(String... args)
   {
-    Scanner z = new Scanner(System.in);
-    System.out.print("Give me a username: ");
-    String identifier = z.nextLine();
-    Client c = new Client(identifier, "127.0.0.1", 5000);
-    c.init();
-    (new Thread(c)).run();
+    Server s = new Server(5000);
+    s.init();
+    (new Thread(s)).run();
   }
 }

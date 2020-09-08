@@ -1,4 +1,8 @@
 /*
+ * Initializable.java
+ * 
+ * Copyright 2020 Coved W. Oswald <coswald@uni.edu>
+ * 
  * This file is part of JTalker.
  *
  * JTalker is free software: you can redistribute it and/or modify it under the
@@ -15,7 +19,7 @@
  * JTalker. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.coswald;
+package com.coswald.jtalker;
 
 /**
  * Describes an object that must call {@link #init()} before the object can be
@@ -39,5 +43,5 @@ public interface Initializable
    * obviously implementation dependent, but MUST NOT be called within the
    * constructor of a class.
    */
-  public void init();
+  public abstract void init();
 }

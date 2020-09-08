@@ -15,11 +15,11 @@
 <p align = "center">
   <a href="https://www.gnu.org/licenses/gpl-3.0"><img src="https://img.shields.io/badge/License-GPL%20v3-blue.svg" alt="GNU GPL v3.0"></a>
   <a href="https://github.com/coswald/JTalker/blob/master/CONTRIBUTING.md"><img src="https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg" alt="Contributor Covenant v1.4"></a>
-  <!-- <a href="https://www.codacy.com?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=coswald/JTalker&amp;utm_campaign=Badge_Grade"><img src="https://api.codacy.com/project/badge/Grade/0ed8150dc0d44ac2a0aeb2e09010c3be" alt="Codacy"></a> -->
-  <!-- TODO: Add Travis Badges -->
-  <a href="https://coswald.github.io/JTalker"><img src="https://img.shields.io/readthedocs/pip.svg" alt="Docs"></a>
-  <!-- TODO: Add Twitter Badge -->
-  <!-- <a href="https://gitter.im/JTalkerJava/"><img src="https://badges.gitter.im/coswald/JTalker.png" alt="Gitter"></a> -->
+  <a href="https://www.codacy.com/manual/coswald/JTalker?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=coswald/JTalker&amp;utm_campaign=Badge_Grade"><img src="https://app.codacy.com/project/badge/Grade/d58722ab0afb4ec6902f5205ee38090f" alt="Codacy"></a>
+  <a href="https://travis-ci.org/github/coswald/JTalker"><img src="https://travis-ci.org/coswald/JTalker.svg?branch=master" alt="Travis CI"></a>
+  <a href="https://coswald.github.io/JTalker/"><img src="https://img.shields.io/readthedocs/pip.svg" alt="Docs"></a>
+  <a href="https://twitter.com/CovedW"><img src="https://img.shields.io/twitter/follow/covedw.svg?style=social" alt="Follow on Twitter"></a>
+  <a href="https://gitter.im/coswaldJTalker/"><img src="https://badges.gitter.im/coswald/JTalker.png" alt="Gitter"></a> -->
   <a href="https://saythanks.io/to/coswald%40uni.edu"><img src="https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg" alt="Say Thanks!"></a>
 </p>
 
@@ -46,13 +46,13 @@ You need the [Java&trade; Runtime Environment](https://www.oracle.com/technetwor
 ### Installing
 We will give you an entire rundown on how to install JTalker. *TODO:* Have a live system set up on my website. If you wish to build the system by hand, here are the steps you will take. The first step is cloning the repository:
 
-```
+```sh
 git clone https://github.com/coswald/JTalker
 ```
 
 Once you have done that, move into the JTalker directory and `make` the project.
 
-```
+```sh
 cd JTalker
 make all
 ```
