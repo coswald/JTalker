@@ -6,6 +6,7 @@
   <br>
   <img src="https://forthebadge.com/images/badges/made-with-java.svg" alt=""> 
   <img src="https://forthebadge.com/images/badges/built-with-love.svg" alt="">
+  <img src="https://forthebadge.com/images/badges/powered-by-responsibility.svg" alt="">
   <img src="https://forthebadge.com/images/badges/no-ragrets.svg" alt="">
   <br>
 </h1>
@@ -35,7 +36,7 @@
 </p>
 
 ## JTalker
-An implementation of a server/client application in Java. This started as an example application for a networking class. However, I wanted to expand on it and test a couple things out. The only real use for JTalker is as an example of a server/client text sender, and to be used concurrently with a packet sniffer such as <a href="http://wireshark.org">Wireshark</a>. 
+An implementation of a server/client application in Java. This started as an example application for a networking class. However, we wanted to expand on it and test a couple things out. The only real use for JTalker is as an example of a server/client text sender, and to be used concurrently with a packet sniffer such as <a href="http://wireshark.org">Wireshark</a>. 
 
 ## Getting Started
 See `Installing` to install JTalker for use or testing purposes. See `Deployment` for notes on how to deploy the project on a live system.
@@ -60,16 +61,22 @@ make all
 The `all` is optional. *TODO:* Generate a test to test the system works.
 
 ## Tests
-*TODO:* We are going to use [Travis CI](https://travis-ci.org/) for tests and testing hooks, look again in the future for more details.
+We use [Travis CI](https://travis-ci.org/) for tests and testing hooks. Currently, the only test we have for JTalker is to see if the project `make` script works. Check the [travis config file](https://github.com/coswald/JTalker/blob/master/.travis.yml) for further developments and a more accurate idea of what scripts are run.
 
 ### Example tests
 *TODO:* Generate JTalker tests.
 
 ### And coding style tests
-*TODO:* Generate tests that allow for testing of our coding style.
+We use [Codacy](https://codacy.com/) for our style checking tests. Check the above listing to see how we are! Note that we have made custom hooks and rules for this project. Our coding style is well defined, and keep updated for documentation on this.
 
 ## Deployment
-*TODO:* Add additional notes about how to deploy this on a live system
+Deployment has two steps. Once the project is completed, a more detailed listing of how this will work can be described. But there are two different types of deployment: Server and Client.
+
+### Server Deployment
+*TODO:* Generate JTalker server deployment guide.
+
+### Clint Deployment
+*TODO:* Generate JTalker client deployment guide.
 
 ## Built With
 * [javac](https://www.java.com/) - The java compiler

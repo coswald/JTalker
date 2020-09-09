@@ -29,12 +29,18 @@ import java.io.BufferedReader;
 import java.io.Closeable;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
-import java.io.InputStreamReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.Socket;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 
+/**
+ * 
+ * @author C. William Oswald
+ * @version 0.0.1
+ * @since JTalker 0.0.1
+ */
 public class Client implements Closeable, Initializable, Runnable
 {
   private String identifier;
@@ -76,14 +82,18 @@ public class Client implements Closeable, Initializable, Runnable
     try
     {
       this.socket = new Socket(this.host, this.port);
-      System.out.println("Connected");
       
       this.input = new BufferedReader(new InputStreamReader(System.in));
       this.serverInput = new DataInputStream(
         new BufferedInputStream(this.socket.getInputStream()));
       this.output = new DataOutputStream(socket.getOutputStream());
       
-      this.running = true;
+      System.out.println("Waiting to be connected...");
+      
+      //wait for the server to accept us
+      this.running = this.serverInput.readBoolean();
+      
+      System.out.println("Connected!");
       
       // Send out our identifier
       this.output.writeUTF(this.identifier);
@@ -160,9 +170,10 @@ public class Client implements Closeable, Initializable, Runnable
   public void close() throws IOException
   {
     this.running = false;
+    //Any one of these lines may throw an IOExceptio
     this.input.close();
     this.output.close();
-    this.socket.close(); //Any one of these lines may throw an IOException
+    this.socket.close();
   }
   
   /**

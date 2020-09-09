@@ -99,6 +99,7 @@ public class Server implements Closeable, Initializable, Runnable
     }
     catch(IOException i)
     {
+      System.out.println("Could not initialize the server!");
       i.printStackTrace();
     }
   }
@@ -126,11 +127,13 @@ public class Server implements Closeable, Initializable, Runnable
         i.printStackTrace();
       }  
       
-      ClientInstance ci = new ClientInstance(socket, this.sos);
-      ci.init();
+      if(socket != null)
+      {
+        ClientInstance ci = new ClientInstance(socket, this.sos);
       
-      this.threadPool.execute(ci); 
-      System.out.println(this.threadPool.getActiveCount());
+        this.threadPool.execute(ci); 
+      }
+      //System.out.println(this.threadPool.getActiveCount());
     }
   }
   
@@ -147,7 +150,14 @@ public class Server implements Closeable, Initializable, Runnable
       this.server.close();
     }
     this.sos.close();
-    //this.socket.close(); //May throw IOException
-    //this.input.close(); //May throw IOException
+  }
+  
+  /**
+   * 
+   * @return
+   */
+  public int getActiveClients()
+  {
+    return this.threadPool.getActiveCount();
   }
 }

@@ -47,7 +47,6 @@ public class ClientInstance implements Closeable, Initializable, Runnable
   private DataOutputStream fakeOutput;
   private ServerOutputStream output;
   private String identifier;
-  private boolean goodToRun;
   
   /**
    * 
@@ -58,7 +57,6 @@ public class ClientInstance implements Closeable, Initializable, Runnable
   {
     this.socket = socket;
     this.output = output;
-    this.goodToRun = false;
   }
   
   /**
@@ -74,6 +72,10 @@ public class ClientInstance implements Closeable, Initializable, Runnable
       this.fakeOutput = new DataOutputStream(this.socket.getOutputStream());
       this.output.add(this.fakeOutput);
       
+      //Tell the client it is connected
+      this.fakeOutput.writeBoolean(true);
+      
+      //read the identifier from the client
       this.identifier = this.input.readUTF();
       System.out.println(this.identifier + " has been accepted!");
     }
@@ -82,7 +84,6 @@ public class ClientInstance implements Closeable, Initializable, Runnable
       i.printStackTrace();
       return;
     }
-    this.goodToRun = true;
   }
   
   /**
@@ -91,29 +92,27 @@ public class ClientInstance implements Closeable, Initializable, Runnable
   @Override
   public void run()
   {
-    if(this.goodToRun)
+    this.init();
+    try
     {
-      try
+      String line = "";
+      while(!line.equalsIgnoreCase(ServerClientConstants.EXIT_MESSAGE))
       {
-        String line = "";
-        while(!line.equalsIgnoreCase(ServerClientConstants.EXIT_MESSAGE))
+        line = this.input.readUTF();
+        if(!line.equalsIgnoreCase(ServerClientConstants.EXIT_MESSAGE))
         {
-          line = this.input.readUTF();
-          if(!line.equalsIgnoreCase(ServerClientConstants.EXIT_MESSAGE))
-          {
-            this.output.writeUTF(this.identifier + ": " + line + "\n\r");
-          }
+          this.output.writeUTF(this.identifier + ": " + line + "\n\r");
         }
-        this.close();
       }
-      catch(SocketException s)
-      {
-        //Do NOTHING
-      }
-      catch(IOException i)
-      {
-        i.printStackTrace();
-      }
+      this.close();
+    }
+    catch(SocketException s)
+    {
+      //Do NOTHING
+    }
+    catch(IOException i)
+    {
+      i.printStackTrace();
     }
   }
   
@@ -126,7 +125,6 @@ public class ClientInstance implements Closeable, Initializable, Runnable
   {
     if(this.socket != null && this.socket != null)
     {
-      this.goodToRun = false;
       this.output.remove(this.fakeOutput);
       this.output.writeUTF(this.identifier + " has left the chat.\n\r");
       this.socket.close();
