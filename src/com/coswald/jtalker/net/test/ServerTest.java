@@ -19,8 +19,22 @@ package com.coswald.jtalker.net.test;
 
 import com.coswald.jtalker.net.Server;
 
+/**
+ * 
+ * @author C. William Oswald
+ * @version 0.0.1
+ * @since JTalker 0.0.1
+ */
 public class ServerTest
 {
+  private ServerTest()
+  {
+  }
+  
+  /**
+   * 
+   * @param args
+   */
   public static void main(String... args)
   {
     Server s = new Server(5000);

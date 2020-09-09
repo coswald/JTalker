@@ -27,6 +27,7 @@ import com.coswald.jtalker.net.ServerOutputStream;
 
 import java.io.Closeable;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
@@ -47,11 +48,14 @@ public class Server implements Closeable, Initializable, Runnable
   private ServerOutputStream sos;
   private ThreadPoolExecutor threadPool; 
   
+  private PrintStream out;
+  
   /**
    * 
+   * @param out
    * @param port
    */
-  public Server(int port)
+  public Server(PrintStream out, int port)
   {
     if(port < ServerClientConstants.MIN_PORT_NUMBER ||
        port > ServerClientConstants.MAX_PORT_NUMBER)
@@ -60,9 +64,10 @@ public class Server implements Closeable, Initializable, Runnable
         ServerClientConstants.MIN_PORT_NUMBER +
         " and " + ServerClientConstants.MAX_PORT_NUMBER + ", inclusive!");
     }
+    this.out = out;
     this.port = port;
     this.running = false;
-    this.sos = new ServerOutputStream(System.out);
+    this.sos = new ServerOutputStream(this.out);
     this.threadPool = (ThreadPoolExecutor)Executors.newFixedThreadPool(
       ServerClientConstants.MAX_CLIENTS);
     
@@ -78,10 +83,20 @@ public class Server implements Closeable, Initializable, Runnable
         }
         catch(IOException i)
         {
-          System.out.println("Could not initialize server!");
+          out.println("Could not initialize server!");
         }
       }
     });
+  }
+  
+  
+  /**
+   * 
+   * @param port
+   */
+  public Server(int port)
+  {
+    this(System.out, port);
   }
   
   /**
@@ -93,13 +108,13 @@ public class Server implements Closeable, Initializable, Runnable
     try
     {
       this.server = new ServerSocket(port);
-      System.out.println("JTalker Server started!\nWaiting for a clients...");
-      System.out.println("Use standard exiting procedures to quit the server.");
+      this.out.println("JTalker Server started!\nWaiting for a clients...");
+      this.out.println("Use standard exiting procedures to quit the server.");
       this.running = true;
     }
     catch(IOException i)
     {
-      System.out.println("Could not initialize the server!");
+      this.out.println("Could not initialize the server!");
       i.printStackTrace();
     }
   }
@@ -119,7 +134,7 @@ public class Server implements Closeable, Initializable, Runnable
       }
       catch(SocketException s)
       {
-        System.out.println("Stopping Server");
+        this.out.println("Stopping Server");
         //System.exit(0);
       }
       catch(IOException i)
@@ -129,11 +144,11 @@ public class Server implements Closeable, Initializable, Runnable
       
       if(socket != null)
       {
-        ClientInstance ci = new ClientInstance(socket, this.sos);
+        ClientInstance ci = new ClientInstance(this.out, socket, this.sos);
       
         this.threadPool.execute(ci); 
       }
-      //System.out.println(this.threadPool.getActiveCount());
+      //this.out.println(this.threadPool.getActiveCount());
     }
   }
   
@@ -143,7 +158,7 @@ public class Server implements Closeable, Initializable, Runnable
   @Override
   public void close() throws IOException
   {
-    System.out.println("\rClosing connection");
+    this.out.println("\rClosing connection");
     if(this.server != null)
     {
       this.threadPool.shutdown();

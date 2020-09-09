@@ -30,6 +30,7 @@ import java.io.Closeable;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.net.Socket;
 import java.net.SocketException;
 
@@ -48,12 +49,15 @@ public class ClientInstance implements Closeable, Initializable, Runnable
   private ServerOutputStream output;
   private String identifier;
   
+  private PrintStream out;
+  
   /**
    * 
    * @param socket
    * @param output
    */
-  public ClientInstance(Socket socket, ServerOutputStream output)
+  public ClientInstance(PrintStream out, Socket socket,
+    ServerOutputStream output)
   {
     this.socket = socket;
     this.output = output;
@@ -77,7 +81,7 @@ public class ClientInstance implements Closeable, Initializable, Runnable
       
       //read the identifier from the client
       this.identifier = this.input.readUTF();
-      System.out.println(this.identifier + " has been accepted!");
+      //System.out.println(this.identifier + " has been accepted!");
     }
     catch(IOException i)
     {
@@ -130,5 +134,14 @@ public class ClientInstance implements Closeable, Initializable, Runnable
       this.socket.close();
       this.input.close();
     }
+  }
+  
+  /**
+   * 
+   * @return
+   */
+  public String getID()
+  {
+    return this.identifier;
   }
 }

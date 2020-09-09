@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"com.coswald"},{"l":"com.coswald.net"},{"l":"com.coswald.net.test"}]
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"com.coswald.jtalker"},{"l":"com.coswald.jtalker.net"},{"l":"com.coswald.jtalker.net.test"}]

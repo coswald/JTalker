@@ -21,14 +21,30 @@ import com.coswald.jtalker.net.Client;
 
 import java.util.Scanner;
 
+/**
+ * 
+ * @author C. William Oswald
+ * @version 0.0.1
+ * @since JTalker 0.0.1
+ */
 public class ClientTest
 {
+  private ClientTest()
+  {
+  }
+  
+  /**
+   * 
+   * @param args
+   */
   public static void main(String... args)
   {
     Scanner z = new Scanner(System.in);
     System.out.print("Give me a username: ");
     String identifier = z.nextLine();
-    Client c = new Client(identifier, "127.0.0.1", 5000);
+    System.out.print("Give me an IP: ");
+    String host = z.nextLine();
+    Client c = new Client(identifier, host, 5000);
     c.init();
     (new Thread(c)).run();
   }

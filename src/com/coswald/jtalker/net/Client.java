@@ -30,7 +30,9 @@ import java.io.Closeable;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.PrintStream;
 import java.net.Socket;
 import java.net.SocketException;
 import java.net.UnknownHostException;
@@ -46,19 +48,26 @@ public class Client implements Closeable, Initializable, Runnable
   private String identifier;
   private String host;
   private int port;
+  private boolean running;
+  
   private Socket socket;
   private BufferedReader input;
   private DataInputStream serverInput;
   private DataOutputStream output;
-  private boolean running;
+  
+  private InputStream in;
+  private PrintStream out;
   
   /**
    * 
+   * @param in
+   * @param out
    * @param identifier
    * @param host
    * @param port
    */
-  public Client(String identifier, String host, int port)
+  public Client(InputStream in, PrintStream out, String identifier,
+    String host, int port)
   {
     if(port < ServerClientConstants.MIN_PORT_NUMBER ||
        port > ServerClientConstants.MAX_PORT_NUMBER)
@@ -71,6 +80,20 @@ public class Client implements Closeable, Initializable, Runnable
     this.host = host;
     this.port = port;
     this.running = false;
+    
+    this.in = in;
+    this.out = out;
+  }
+  
+  /**
+   * 
+   * @param identifier
+   * @param host
+   * @param port
+   */
+  public Client(String identifier, String host, int port)
+  {
+    this(System.in, System.out, identifier, host, port);
   }
   
   /**
@@ -83,17 +106,17 @@ public class Client implements Closeable, Initializable, Runnable
     {
       this.socket = new Socket(this.host, this.port);
       
-      this.input = new BufferedReader(new InputStreamReader(System.in));
+      this.input = new BufferedReader(new InputStreamReader(this.in));
       this.serverInput = new DataInputStream(
         new BufferedInputStream(this.socket.getInputStream()));
       this.output = new DataOutputStream(socket.getOutputStream());
       
-      System.out.println("Waiting to be connected...");
+      this.out.println("Waiting to be connected...");
       
       //wait for the server to accept us
       this.running = this.serverInput.readBoolean();
       
-      System.out.println("Connected!");
+      this.out.println("Connected!");
       
       // Send out our identifier
       this.output.writeUTF(this.identifier);
@@ -109,19 +132,21 @@ public class Client implements Closeable, Initializable, Runnable
             try
             {
               line = serverInput.readUTF();
-              System.out.print(line);
+              out.print(line);
             }
             catch(SocketException s)
             {
-              System.out.println("Connection has been lost");
+              out.println("Connection has been lost");
+              running = false;
               //System.exit(0);
             }
             catch(IOException i)
             {
               //i.printStackTrace();
-              System.out.println("Server has shutdown or another I/O error " +
+              out.println("Server has shutdown or another I/O error " +
                                  "happened.");
-              System.exit(1);
+              running = false;
+              //System.exit(1);
             }
           }
         }
@@ -129,12 +154,12 @@ public class Client implements Closeable, Initializable, Runnable
     }
     catch(UnknownHostException u)
     {
-      System.out.println("Unknown Host!");
+      this.out.println("Unknown Host!");
       //System.exit(1);
     }
     catch(IOException i)
     {
-      System.out.println("Error while initializing IO Stream!");
+      this.out.println("Error while initializing IO Stream!");
       //System.exit(2);
     }
   }
@@ -148,7 +173,8 @@ public class Client implements Closeable, Initializable, Runnable
     try
     {
       String line = "";
-      while(!line.equalsIgnoreCase(ServerClientConstants.EXIT_MESSAGE))
+      while(this.running && 
+        !line.equalsIgnoreCase(ServerClientConstants.EXIT_MESSAGE))
       {
         //System.out.print(this.identifier + ": ");
         line = this.input.readLine();
