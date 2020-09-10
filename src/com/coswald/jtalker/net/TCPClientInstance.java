@@ -1,5 +1,5 @@
 /*
- * ClientInstance.java
+ * TCPClientInstance.java
  * 
  * Copyright 2020 Coved W. Oswald <coswald@uni.edu>
  * 
@@ -21,10 +21,6 @@
 
 package com.coswald.jtalker.net;
 
-import com.coswald.jtalker.Initializable;
-import com.coswald.jtalker.net.ServerClientConstants;
-import com.coswald.jtalker.net.ServerOutputStream;
-
 import java.io.BufferedInputStream;
 import java.io.Closeable;
 import java.io.DataInputStream;
@@ -34,13 +30,17 @@ import java.io.PrintStream;
 import java.net.Socket;
 import java.net.SocketException;
 
+import com.coswald.jtalker.Initializable;
+import com.coswald.jtalker.net.ServerClientConstants;
+import com.coswald.jtalker.net.ServerOutputStream;
+
 /**
  *
  * @author C. William Oswald
  * @version 0.0.1
  * @since JTalker 0.0.1
  */
-public class ClientInstance implements Closeable, Initializable, Runnable
+public class TCPClientInstance implements Closeable, Initializable, Runnable
 {
   protected Socket socket;
   
@@ -56,7 +56,7 @@ public class ClientInstance implements Closeable, Initializable, Runnable
    * @param socket
    * @param output
    */
-  public ClientInstance(PrintStream out, Socket socket,
+  public TCPClientInstance(PrintStream out, Socket socket,
     ServerOutputStream output)
   {
     this.socket = socket;

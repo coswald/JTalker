@@ -22,7 +22,11 @@
 package com.coswald.jtalker.net;
 
 /**
- * 
+ * <p>A set of descriptions for specific constants within a JTalker application.
+ * The list of constants are continually growing, so instead of listing them all
+ * out here in the class description, know that this class is a utility class
+ * and cannot be extended. If you wish to add more constants, create another
+ * utility class for your expanded JTalker application.</p>
  * @author C. William Oswald
  * @version 0.0.1
  * @since JTalker 0.0.1
@@ -30,24 +34,31 @@ package com.coswald.jtalker.net;
 public final class ServerClientConstants
 {
   /**
-   * 
+   * Describes the exit command sent from the
+   * {@link com.coswald.jtalker.net.TCPClient} to the
+   * {@link com.coswald.jtalker.net.TCPServer}.
    */
   public static final String EXIT_MESSAGE = "EXIT";
   
   /**
-   * 
+   * Determines the maximum amount of clients a server can have.
    */
   public static final int MAX_CLIENTS = 8;
   
   /**
-   * 
+   * Shows the maximum port number for a JTalker application.
    */
   public static final int MAX_PORT_NUMBER = 65535;
   
   /**
-   * 
+   * Shows the minimum port number for a JTalker application.
    */
   public static final int MIN_PORT_NUMBER = 0;
+  
+  /**
+   * 
+   */
+  public static final int TCP_PORT = 5000;
   
   private ServerClientConstants() {}
 }

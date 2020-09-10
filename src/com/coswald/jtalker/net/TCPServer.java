@@ -1,5 +1,5 @@
 /*
- * Server.java
+ * TCPServer.java
  * 
  * Copyright 2020 Coved W. Oswald <coswald@uni.edu>
  * 
@@ -21,10 +21,6 @@
 
 package com.coswald.jtalker.net;
 
-import com.coswald.jtalker.Initializable;
-import com.coswald.jtalker.net.ClientInstance;
-import com.coswald.jtalker.net.ServerOutputStream;
-
 import java.io.Closeable;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -34,13 +30,17 @@ import java.net.SocketException;
 import java.util.concurrent.Executors; 
 import java.util.concurrent.ThreadPoolExecutor;
 
+import com.coswald.jtalker.Initializable;
+import com.coswald.jtalker.net.TCPClientInstance;
+import com.coswald.jtalker.net.ServerOutputStream;
+
 /**
  *
  * @author C. William Oswald
  * @version 0.0.1
  * @since JTalker 0.0.1
  */
-public class Server implements Closeable, Initializable, Runnable
+public class TCPServer implements Closeable, Initializable, Runnable
 {
   private boolean running;
   private int port;
@@ -55,7 +55,7 @@ public class Server implements Closeable, Initializable, Runnable
    * @param out
    * @param port
    */
-  public Server(PrintStream out, int port)
+  public TCPServer(PrintStream out, int port)
   {
     if(port < ServerClientConstants.MIN_PORT_NUMBER ||
        port > ServerClientConstants.MAX_PORT_NUMBER)
@@ -94,7 +94,7 @@ public class Server implements Closeable, Initializable, Runnable
    * 
    * @param port
    */
-  public Server(int port)
+  public TCPServer(int port)
   {
     this(System.out, port);
   }
@@ -108,7 +108,7 @@ public class Server implements Closeable, Initializable, Runnable
     try
     {
       this.server = new ServerSocket(port);
-      this.out.println("JTalker Server started!\nWaiting for a clients...");
+      this.out.println("JTalker TCP Server started!\nWaiting for a clients...");
       this.out.println("Use standard exiting procedures to quit the server.");
       this.running = true;
     }
@@ -134,7 +134,7 @@ public class Server implements Closeable, Initializable, Runnable
       }
       catch(SocketException s)
       {
-        this.out.println("Stopping Server");
+        this.out.println("Stopping TCP Server");
         //System.exit(0);
       }
       catch(IOException i)
@@ -144,7 +144,7 @@ public class Server implements Closeable, Initializable, Runnable
       
       if(socket != null)
       {
-        ClientInstance ci = new ClientInstance(this.out, socket, this.sos);
+        TCPClientInstance ci = new TCPClientInstance(this.out, socket, this.sos);
       
         this.threadPool.execute(ci); 
       }

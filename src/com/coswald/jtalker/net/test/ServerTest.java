@@ -1,4 +1,8 @@
 /*
+ * ServerTest.java
+ * 
+ * Copyright 2020 Coved W. Oswald <coswald@uni.edu>
+ * 
  * This file is part of JTalker.
  *
  * JTalker is free software: you can redistribute it and/or modify it under the
@@ -17,7 +21,8 @@
 
 package com.coswald.jtalker.net.test;
 
-import com.coswald.jtalker.net.Server;
+import com.coswald.jtalker.net.TCPServer;
+import com.coswald.jtalker.net.ServerClientConstants;
 
 /**
  * 
@@ -37,7 +42,7 @@ public class ServerTest
    */
   public static void main(String... args)
   {
-    Server s = new Server(5000);
+    TCPServer s = new TCPServer(ServerClientConstants.TCP_PORT);
     s.init();
     (new Thread(s)).run();
   }

@@ -1,4 +1,8 @@
 /*
+ * ClientTest.java
+ * 
+ * Copyright 2020 Coved W. Oswald <coswald@uni.edu>
+ * 
  * This file is part of JTalker.
  *
  * JTalker is free software: you can redistribute it and/or modify it under the
@@ -17,9 +21,10 @@
 
 package com.coswald.jtalker.net.test;
 
-import com.coswald.jtalker.net.Client;
-
 import java.util.Scanner;
+
+import com.coswald.jtalker.net.TCPClient;
+import com.coswald.jtalker.net.ServerClientConstants;
 
 /**
  * 
@@ -44,7 +49,7 @@ public class ClientTest
     String identifier = z.nextLine();
     System.out.print("Give me an IP: ");
     String host = z.nextLine();
-    Client c = new Client(identifier, host, 5000);
+    TCPClient c = new TCPClient(identifier, host, ServerClientConstants.TCP_PORT);
     c.init();
     (new Thread(c)).run();
   }

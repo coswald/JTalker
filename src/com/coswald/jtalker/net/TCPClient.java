@@ -1,5 +1,5 @@
 /*
- * Client.java
+ * TCPClient.java
  * 
  * Copyright 2020 Coved W. Oswald <coswald@uni.edu>
  * 
@@ -21,9 +21,6 @@
 
 package com.coswald.jtalker.net;
 
-import com.coswald.jtalker.Initializable;
-import com.coswald.jtalker.net.ServerClientConstants;
-
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.Closeable;
@@ -37,13 +34,16 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 
+import com.coswald.jtalker.Initializable;
+import com.coswald.jtalker.net.ServerClientConstants;
+
 /**
  * 
  * @author C. William Oswald
  * @version 0.0.1
  * @since JTalker 0.0.1
  */
-public class Client implements Closeable, Initializable, Runnable
+public class TCPClient implements Closeable, Initializable, Runnable
 {
   private String identifier;
   private String host;
@@ -66,7 +66,7 @@ public class Client implements Closeable, Initializable, Runnable
    * @param host
    * @param port
    */
-  public Client(InputStream in, PrintStream out, String identifier,
+  public TCPClient(InputStream in, PrintStream out, String identifier,
     String host, int port)
   {
     if(port < ServerClientConstants.MIN_PORT_NUMBER ||
@@ -91,7 +91,7 @@ public class Client implements Closeable, Initializable, Runnable
    * @param host
    * @param port
    */
-  public Client(String identifier, String host, int port)
+  public TCPClient(String identifier, String host, int port)
   {
     this(System.in, System.out, identifier, host, port);
   }
