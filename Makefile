@@ -34,6 +34,7 @@ bin: source
 	@echo "Compiling successful"
 
 source:
+#	@if [ ! -f sources ]; then echo "Generating source files" && if [ "$(OS)" = "Windows_NT" ]; then dir /s/b *.java > sources; else find . -name *.java > sources; fi else echo "Sources file exists"; fi
 	@if [ ! -f sources ]; then echo "Generating source files" && find . -name *.java > sources; else echo "Sources file exists"; fi
 
 docs: source
