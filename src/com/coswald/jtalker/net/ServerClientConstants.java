@@ -1,5 +1,5 @@
 /*
- * Initializable.java
+ * ServerClientConstants.java
  * 
  * Copyright 2020 Coved W. Oswald <coswald@uni.edu>
  * 
@@ -36,27 +36,28 @@ public final class ServerClientConstants
   /**
    * Describes the exit command sent from the
    * {@link com.coswald.jtalker.net.TCPClient} to the
-   * {@link com.coswald.jtalker.net.TCPServer}.
+   * {@link com.coswald.jtalker.net.TCPServer}. Its value is {@value}.
    */
   public static final String EXIT_MESSAGE = "EXIT";
   
   /**
-   * Determines the maximum amount of clients a server can have.
+   * The maximum amount of clients a server can have. Its value is {@value}.
    */
   public static final int MAX_CLIENTS = 8;
   
   /**
-   * Shows the maximum port number for a JTalker application.
+   * The maximum port number for a JTalker application. Its value is {@value}.
    */
   public static final int MAX_PORT_NUMBER = 65535;
   
   /**
-   * Shows the minimum port number for a JTalker application.
+   * The minimum port number for a JTalker application. Its value is {@value}.
    */
   public static final int MIN_PORT_NUMBER = 0;
   
   /**
-   * 
+   * The port that is used by the {@link com.coswald.jtalker.net.TCPServer} and
+   * the {@link com.coswald.jtalker.net.TCPClient}. Its value is {@value}.
    */
   public static final int TCP_PORT = 5000;
   

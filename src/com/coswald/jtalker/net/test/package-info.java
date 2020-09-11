@@ -20,14 +20,11 @@
  */
 
 /**
- * <p>A simple server/client implementation in Java. This package defines all 
- * of the necessary backbone for the project, but does not deal with the
- * specifics of implementation. If an object or interface or enumeration is
- * located here, it is because every part of the project (GUI and networking)
- * could benefit from the file in question.</p>
+ * <p>The tests for the {@link com.coswald.jtalker.net} package</p>
  * @author C. William Oswald
  * @version 0.0.1
  * @since JTalker 0.0.1
- * @see com.coswald.jtalker.Initializable;
+ * @see com.coswald.jtalker.net.test.ClientTest
+ * @see com.coswald.jtalker.net.test.ServerTest
  */
-package com.coswald.jtalker;
+package com.coswald.jtalker.net.test;

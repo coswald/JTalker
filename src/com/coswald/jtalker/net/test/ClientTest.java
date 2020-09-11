@@ -27,10 +27,13 @@ import com.coswald.jtalker.net.TCPClient;
 import com.coswald.jtalker.net.ServerClientConstants;
 
 /**
- * 
+ * <p>A simple client test. When the {@link #main(String[]) main} method is
+ * called, the application will prompt the user for a username, an IP to connect
+ * to, and then try to connect to the server.</p>
  * @author C. William Oswald
  * @version 0.0.1
  * @since JTalker 0.0.1
+ * @see #main(String[])
  */
 public class ClientTest
 {
@@ -39,8 +42,11 @@ public class ClientTest
   }
   
   /**
-   * 
-   * @param args
+   * Runs the client test. This will prompt the user for a username, and IP to
+   * connect to, and then try to connect to the server. This uses the 
+   * {@link com.coswald.jtalker.net.ServerClientConstants#TCP_PORT port} number
+   * defined in the <i>ServerClientConstants</i> class.
+   * @param args No arguments are used; ignored parameter.
    */
   public static void main(String... args)
   {

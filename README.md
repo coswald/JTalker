@@ -75,7 +75,7 @@ Deployment has two steps. Once the project is completed, a more detailed listing
 ### Server Deployment
 *TODO:* Generate JTalker server deployment guide.
 
-### Clint Deployment
+### Client Deployment
 *TODO:* Generate JTalker client deployment guide.
 
 ## Built With
