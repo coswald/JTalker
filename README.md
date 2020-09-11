@@ -64,7 +64,7 @@ The `all` is optional. *TODO:* Generate a test to test the system works.
 We use [Travis CI](https://travis-ci.org/) for tests and testing hooks. Currently, the only test we have for JTalker is to see if the project `make` script works. Check the [travis config file](https://github.com/coswald/JTalker/blob/master/.travis.yml) for further developments and a more accurate idea of what scripts are run.
 
 ### Example tests
-*TODO:* Generate JTalker tests.
+`make`
 
 ### And coding style tests
 We use [Codacy](https://codacy.com/) for our style checking tests. Check the above listing to see how we are! Note that we have made custom hooks and rules for this project. Our coding style is well defined, and keep updated for documentation on this.
