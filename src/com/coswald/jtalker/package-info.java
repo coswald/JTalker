@@ -28,6 +28,6 @@
  * @author C. William Oswald
  * @version 0.0.1
  * @since JTalker 0.0.1
- * @see com.coswald.jtalker.Initializable;
+ * @see com.coswald.jtalker.Initializable
  */
 package com.coswald.jtalker;
