@@ -22,14 +22,14 @@
 package com.coswald.jtalker;
 
 /**
- * Describes an object that must call {@link #init()} before the object can be
- * used. This interface serves as a tag and a methodology: in order for an
+ * Describes an object that must call {@link #init() init} before the object can
+ * be used. This interface serves as a tag and a methodology: in order for an
  * object to be used, it must be initialized. However, some work (like waiting
  * for a thread to start) must not be used within the constructor. Therefore,
  * this interface provides a way for an object to say "I can be a placeholder,
- * but I haven't been initilized yet". As such, the constructor of the object
- * MUST NOT call he {@link #init()} method. However, we have no such way of
- * checking this, so please consider this as a methodological coding style.
+ * but I haven't been initialized yet". As such, the constructor of the object
+ * MUST NOT call the {@link #init() init} method. However, we have no such way
+ * of checking this, so please consider this as a methodological coding style.
  * 
  * @author C. William Oswald
  * @version 0.0.1

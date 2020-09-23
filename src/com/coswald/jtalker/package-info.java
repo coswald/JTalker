@@ -20,7 +20,15 @@
  */
 
 /**
- * 
+ * <p>A server/client chat application in Java. This package defines useful
+ * objects that may be used by any part of the JTalker application. This package
+ * differs from a utility package, as it only implements interfaces and
+ * abstract classes.</p>
+ * <p>The JTalker application is licensed under GNU General Public License, and
+ * this and all subsequent sub-packages are as well. See the file header of
+ * each file, or visit
+ * <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GNU's website</a> for
+ * more details.
  * @author C. William Oswald
  * @version 0.0.1
  * @since JTalker 0.0.1
