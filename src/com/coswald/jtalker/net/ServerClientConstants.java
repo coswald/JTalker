@@ -1,5 +1,5 @@
 /*
- * Initializable.java
+ * ServerClientConstants.java
  * 
  * Copyright 2020 Coved W. Oswald <coswald@uni.edu>
  * 
@@ -56,7 +56,7 @@ public final class ServerClientConstants
   public static final int MIN_PORT_NUMBER = 0;
   
   /**
-   * 
+   * The port to listen on and talk on via TCP.
    */
   public static final int TCP_PORT = 5000;
   
