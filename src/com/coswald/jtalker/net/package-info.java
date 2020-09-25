@@ -20,7 +20,13 @@
  */
 
 /**
- * 
+ * <p>Utilizes java socket programming for use with the JTalker application.
+ * This package defines and constructs objects with which JTalker can use to 
+ * talk between a server and a client. It also includes some utility classes
+ * that only certain net packages would use (so there would be little point
+ * separating them into a different package). This package is the main
+ * backbone to the JTalker application; a lot of the software depends on this
+ * package and it's classes to work smoothly.</p>
  * @author C. William Oswald
  * @version 0.0.1
  * @since JTalker 0.0.1

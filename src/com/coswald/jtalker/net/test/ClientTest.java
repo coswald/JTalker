@@ -27,20 +27,28 @@ import com.coswald.jtalker.net.TCPClient;
 import com.coswald.jtalker.net.ServerClientConstants;
 
 /**
- * 
+ * Tests {@link com.coswald.jtalker.net.TCPClient TCPClient}. This will test the
+ * client until the user doesn't want to connect to any more servers.
  * @author C. William Oswald
  * @version 0.0.1
- * @since JTalker 0.0.1
+ * @since JTalker 0.1.0
  */
-public class ClientTest
+public final class ClientTest
 {
+  private static final int SLEEP_TIME = 5000;
+  
   private ClientTest()
   {
   }
   
   /**
-   * 
-   * @param args
+   * Starts the test. This will ask the user for a user name, a host address,
+   * and then automatically connect to the server specified. Once they exit, it
+   * will ask if they want to join another server. If they do, the process
+   * repeats. If not, the client shuts down and the application is exited. The
+   * port the socket binds to is
+   * {@value com.coswald.jtalker.net.ServerClientConstants#TCP_PORT}.
+   * @param args Not used.
    */
   public static void main(String... args)
   {
@@ -49,8 +57,39 @@ public class ClientTest
     String identifier = z.nextLine();
     System.out.print("Give me an IP: ");
     String host = z.nextLine();
-    TCPClient c = new TCPClient(identifier, host, ServerClientConstants.TCP_PORT);
+    TCPClient c = new TCPClient(identifier, host,
+      ServerClientConstants.TCP_PORT);
     c.init();
-    (new Thread(c)).run();
+    String yesno = "y";
+    while(yesno.equalsIgnoreCase("y"))
+    {
+      (new Thread(c)).run();
+      while(c.isRunning())
+      {
+        try
+        {
+          Thread.sleep(SLEEP_TIME);
+        }
+        catch(InterruptedException ie)
+        {
+          ie.printStackTrace();
+        }
+      }
+      System.out.println("Continue (Y/N)?: ");
+      if(z.hasNextLine())
+      {
+        yesno = z.nextLine();
+      }
+      if(yesno.equalsIgnoreCase("y"))
+      {
+        System.out.print("Give me a username: ");
+        identifier = z.nextLine();
+        System.out.print("Give me an IP: ");
+        host = z.nextLine();
+        c.setID(identifier);
+        c.setHost(host);
+        c.init();
+      }
+    }
   }
 }

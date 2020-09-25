@@ -25,20 +25,22 @@ import com.coswald.jtalker.net.TCPServer;
 import com.coswald.jtalker.net.ServerClientConstants;
 
 /**
- * 
+ * Tests {@link com.coswald.jtalker.net.TCPServer TCPServer}. This will test the
+ * server until the user enters the escape character.
  * @author C. William Oswald
  * @version 0.0.1
  * @since JTalker 0.0.1
  */
-public class ServerTest
+public final class ServerTest
 {
   private ServerTest()
   {
   }
   
   /**
-   * 
-   * @param args
+   * Starts a server on port
+   * {@value com.coswald.jtalker.net.ServerClientConstants#TCP_PORT}.
+   * @param args Not used.
    */
   public static void main(String... args)
   {
