@@ -1,5 +1,5 @@
 /*
- * ServerTest.java
+ * package-info.java
  * 
  * Copyright 2020 Coved W. Oswald <coswald@uni.edu>
  * 
@@ -19,33 +19,10 @@
  * JTalker. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.coswald.jtalker.net.test;
-
-import com.coswald.jtalker.net.TCPServer;
-import com.coswald.jtalker.net.ServerClientConstants;
-
 /**
- * Tests {@link com.coswald.jtalker.net.TCPServer TCPServer}. This will test the
- * server until the user enters the escape character.
+ * <p>Tests the {@link com.coswald.jtalker.net net} package.</p>
  * @author C. William Oswald
  * @version 0.0.1
  * @since JTalker 0.0.1
  */
-public final class ServerTest
-{
-  private ServerTest()
-  {
-  }
-  
-  /**
-   * Starts a server on port
-   * {@value com.coswald.jtalker.net.ServerClientConstants#TCP_PORT}.
-   * @param args Not used.
-   */
-  public static void main(String... args)
-  {
-    TCPServer s = new TCPServer(ServerClientConstants.TCP_PORT);
-    s.init();
-    (new Thread(s)).run();
-  }
-}
+package com.coswald.jtalker.net.test;

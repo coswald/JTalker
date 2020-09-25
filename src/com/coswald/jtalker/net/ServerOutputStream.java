@@ -33,12 +33,23 @@ import java.util.ArrayList;
  * {@link com.coswald.jtalker.net.TCPServer TCPServer} and passed to a 
  * {@link com.coswald.jtalker.net.TCPClientInstance TCPClientInstance} to make
  * sure the server can talk to multiple clients at the same time.</p>
- * <p>In this class you will see a lot of inherited documentation. This is
- * because I did not want to rewrite the wheel when documenting; however, this
- * inherited documentation comes from {@code FilerOutputStream}. Thus, any
- * documentation <b>should</b> actually come from {@code DataOutputStream}. If
- * there are any misconstrued documentation, please refer to
- * {@code DataOutputStream}.
+ * <p>Note that no method in this class is declared as {@code synchronized}.
+ * This is due to the fact that there should be no reason for it to be so. Even
+ * though we are having multi-threaded access on this object, only output is
+ * handled, and there is no way of circling back input. That being said, if in
+ * the future that is intended functionality, you may consider having an object
+ * lock on the methods that you wish to use. We did not want to sacrifice 
+ * performance when we didn't need to.</p>
+ * <p>In this class you will see a lot of "inherited" documentation. <strike>
+ * This is because I did not want to rewrite the wheel when documenting;
+ * however, this inherited documentation comes from {@code FilerOutputStream}.
+ * Thus, any documentation <b>should</b> actually come from
+ * {@code DataOutputStream}. If there are any misconstrued documentation, please
+ * refer to {@code DataOutputStream}.</strike> I now put the "inherited" in air
+ * quotes, due to the fact that I ended up having to re-invent the wheel on my
+ * journey to getting the Javadoc 11 tool to work for me. I <b>could</b> get
+ * the {@code inheritDoc} tag to work, but now all documentation is explicit
+ * instead of lazy. Enjoy the copy and paste.
  * @author C. William Oswald
  * @version 0.0.1
  * @since JTalker 0.0.1
@@ -358,14 +369,12 @@ public final class ServerOutputStream extends FilterOutputStream implements
 
   /**
    * Writes two bytes of length information to the output streams, followed by
-   * the
-   * <a href="https://docs.oracle.com/javase/7/docs/api/java/io/DataInput.html#modified-utf-8">
-   * modified UTF-8</a> representation of every character in the string s. If s
-   * is {@code null}, a {@code NullPointerException} is thrown. Each character
-   * in the string s is converted to a group of one, two, or three bytes, 
-   * depending on the value of the character. See
-   * {@link java.io.DataOutputStream#writeUTF(String) this} documentation for
-   * more details.
+   * the <a href="https://tinyurl.com/p6eduds">modified UTF-8</a> representation
+   * of every character in the string s. If s is {@code null}, a
+   * {@code NullPointerException} is thrown. Each character in the string s is
+   * converted to a group of one, two, or three bytes, depending on the value of
+   * the character. See {@link java.io.DataOutputStream#writeUTF(String) this}
+   * documentation for more details.
    * @param line The string value to be written.
    * @throws IOException If an I/O error occurs.
    */
