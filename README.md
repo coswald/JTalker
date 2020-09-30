@@ -15,7 +15,7 @@
 <h4 align="center">An implementation of a server/client application in
   Java.</h4>
 
-<p align = "center">
+<p align="center">
   <a href="https://www.gnu.org/licenses/gpl-3.0"><img src="https://img.shields.io/badge/License-GPL%20v3-blue.svg" alt="GNU GPL v3.0"></a>
   <a href="https://github.com/coswald/JTalker/blob/master/CONTRIBUTING.md"><img src="https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg" alt="Contributor Covenant v1.4"></a>
   <a href="https://www.codacy.com/manual/coswald/JTalker?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=coswald/JTalker&amp;utm_campaign=Badge_Grade"><img src="https://app.codacy.com/project/badge/Grade/d58722ab0afb4ec6902f5205ee38090f" alt="Codacy"></a>
