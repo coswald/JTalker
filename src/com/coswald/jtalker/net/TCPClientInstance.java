@@ -21,18 +21,18 @@
 
 package com.coswald.jtalker.net;
 
+import com.coswald.jtalker.Initializable;
+import com.coswald.jtalker.net.ServerClientConstants;
+import com.coswald.jtalker.net.ServerOutputStream;
+
 import java.io.BufferedInputStream;
 import java.io.Closeable;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.PrintStream;
+
 import java.net.Socket;
 import java.net.SocketException;
-
-import com.coswald.jtalker.Initializable;
-import com.coswald.jtalker.net.ServerClientConstants;
-import com.coswald.jtalker.net.ServerOutputStream;
 
 /**
  * <p>A listener that broadcasts all of what it "hears" from one client to the
@@ -95,7 +95,7 @@ public class TCPClientInstance implements Closeable, Initializable, Runnable
    * output stream to the {@code ServerOutputStream} associated with the server.
    * It will then write a boolean ({@code true}) to the output stream and listen
    * for a unique identifier. Once the identifier is received, it is ready for
-   * listening within the {@link run() run} method.
+   * listening within the {@link #run() run} method.
    */
   @Override
   public final void init()

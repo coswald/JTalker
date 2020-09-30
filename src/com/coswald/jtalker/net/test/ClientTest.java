@@ -23,8 +23,8 @@ package com.coswald.jtalker.net.test;
 
 import java.util.Scanner;
 
-import com.coswald.jtalker.net.TCPClient;
 import com.coswald.jtalker.net.ServerClientConstants;
+import com.coswald.jtalker.net.TCPClient;
 
 /**
  * Tests {@link com.coswald.jtalker.net.TCPClient TCPClient}. This will test the
@@ -36,6 +36,9 @@ import com.coswald.jtalker.net.ServerClientConstants;
 public final class ClientTest
 {
   private static final int SLEEP_TIME = 5000;
+  private static final String USER_PROMPT = "Give me a username: ";
+  private static final String IP_PROMPT = "Give me an IP: ";
+  private static final String YES = "y";
   
   private ClientTest()
   {
@@ -53,15 +56,15 @@ public final class ClientTest
   public static void main(String... args)
   {
     Scanner z = new Scanner(System.in);
-    System.out.print("Give me a username: ");
+    System.out.print(USER_PROMPT);
     String identifier = z.nextLine();
-    System.out.print("Give me an IP: ");
+    System.out.print(IP_PROMPT);
     String host = z.nextLine();
     TCPClient c = new TCPClient(identifier, host,
       ServerClientConstants.TCP_PORT);
     c.init();
-    String yesno = "y";
-    while(yesno.equalsIgnoreCase("y"))
+    String yesno = YES;
+    while(yesno.equalsIgnoreCase(YES))
     {
       (new Thread(c)).run();
       while(c.isRunning())
@@ -80,11 +83,11 @@ public final class ClientTest
       {
         yesno = z.nextLine();
       }
-      if(yesno.equalsIgnoreCase("y"))
+      if(yesno.equalsIgnoreCase(YES))
       {
-        System.out.print("Give me a username: ");
+        System.out.print(USER_PROMPT);
         identifier = z.nextLine();
-        System.out.print("Give me an IP: ");
+        System.out.print(IP_PROMPT);
         host = z.nextLine();
         c.setID(identifier);
         c.setHost(host);

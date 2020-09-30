@@ -25,7 +25,7 @@
  * panel, the canvas panel, the chat panel, and the frame itself. The menu bar
  * is defined within the frame itself. Any constants that are used by any
  * graphical element are defined within
- * {@link com.coswald.jtalker.gui.GUIConstants}.
+ * {@link com.coswald.jtalker.gui.GUIConstants}.</p>
  * @author C. William Oswald
  * @version 0.0.1
  * @since JTalker 0.1.5

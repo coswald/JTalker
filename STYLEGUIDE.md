@@ -234,8 +234,7 @@ shortcuts to navigate code.
 
 ### Field, class, and method declarations
 
-##### Modifier order
-
+#### Modifier order
 We follow the
 [Java Language Specification](http://docs.oracle.com/javase/specs/) for modifier
 ordering (sections
@@ -318,7 +317,7 @@ suggests that a class is too complex and should be broken apart.
     // Good.
     String value;
 
-### Space pad operators and equals.
+### Space pad operators and equals
 
     :::java
     // Bad.
@@ -534,21 +533,24 @@ change, like a spell check).
 #### Import ordering
 Imports are grouped by top-level package, with blank lines separating groups.
 Static imports are grouped in the same way, in a section below traditional
-imports. However, we advise agains using static imports.
+imports. However, we advise agains using static imports. Note that all imports
+are in alphabetical order.
 
     :::java
-    import java.*
-    import javax.*
-
-    import scala.*
-
     import com.*
+    
+    import com.twitter.*
+    
+    import java.*
+    import java.awt.*
+    
+    import javax.*
 
     import net.*
 
     import org.*
 
-    import com.twitter.*
+    import scala.*
     
     // Acceptable, but we do not prefer it.
     import static *
@@ -1101,7 +1103,6 @@ use try/finally to guarantee resource symmetry.
       }
     }
 
-
 ### Clean code
 
 #### Disambiguate
@@ -1141,7 +1142,6 @@ change the types used internally without affecting users or peripheral code.
     {
       Iterable<User> fetchUsers(String query);
     }
-
 
 #### Always use type parameters
 Java 5 introduced support for
@@ -1338,7 +1338,7 @@ and
 [Objects.hashCode()](https://docs.oracle.com/javase/7/docs/api/java/lang/Object.html#hashCode())
 make it very easy to follow these contracts.
 
-### Premature optimization is the root of all evil.
+### Premature optimization is the root of all evil
 Donald Knuth is a smart guy, and he had a few things to
 [say](http://c2.com/cgi/wiki?PrematureOptimization) on the topic.
 
@@ -1524,7 +1524,7 @@ down, consider registering with
 [ShutdownRegistry](https://github.com/twitter/commons/blob/master/src/java/com/twitter/common/application/ShutdownRegistry.java).
 
 ### Avoid unnecessary code
-#### Superfluous temporary variables.
+#### Superfluous temporary variables
 
     :::java
     // Bad.
@@ -1536,7 +1536,7 @@ down, consider registering with
     // Good.
     return fetchStrings();
 
-#### Unneeded assignment.
+#### Unneeded assignment
 
     :::java
     // Bad.
