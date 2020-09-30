@@ -11,7 +11,7 @@ with the project.
 
 1. Ensure any install or build dependencies are removed before the end of the
    layer when doing a build.
-   
+      
 2. Update the README.md with details of changes to the interface, this includes
    new environment variables, exposed ports, useful file locations and container
    parameters.
@@ -94,8 +94,8 @@ representative at an online or offline event.
 
 Instances of abusive, harassing, or otherwise unacceptable behavior may be
 reported to the community leaders responsible for enforcement at
-<coswald@uni.edu>. All complaints will be reviewed and investigated promptly and
-fairly.
+&lt;coswald@uni.edu&gt;. All complaints will be reviewed and investigated
+promptly and fairly.
 
 All community leaders are obligated to respect the privacy and security of the
 reporter of any incident.

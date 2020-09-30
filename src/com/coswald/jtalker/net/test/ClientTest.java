@@ -21,10 +21,10 @@
 
 package com.coswald.jtalker.net.test;
 
-import java.util.Scanner;
-
 import com.coswald.jtalker.net.ServerClientConstants;
 import com.coswald.jtalker.net.TCPClient;
+
+import java.util.Scanner;
 
 /**
  * Tests {@link com.coswald.jtalker.net.TCPClient TCPClient}. This will test the
