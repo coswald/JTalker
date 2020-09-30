@@ -55,7 +55,7 @@ import javax.swing.event.ChangeListener;
  * </p>
  * @author C. William Oswald
  * @version 0.0.1
- * @since JTalker 0.2.0
+ * @since JTalker 0.1.5
  * @see javax.swing.JColorChooser
  */
 public class ColorChooserPanel extends JPanel implements Initializable
@@ -169,7 +169,7 @@ public class ColorChooserPanel extends JPanel implements Initializable
    * {@link #colorChooser chooser's} current color.
    * @author C. William Oswald
    * @version 0.0.1
-   * @since JTalker 0.2.0
+   * @since JTalker 0.1.5
    */
   protected class ColorUpdater implements ChangeListener
   {
