@@ -22,6 +22,7 @@
 package com.coswald.jtalker.gui;
 
 import com.coswald.jtalker.Initializable;
+import com.coswald.jtalker.gui.Colorizer;
 import com.coswald.jtalker.gui.GUIConstants;
 
 import java.awt.BorderLayout;
@@ -146,13 +147,32 @@ public class ColorChooserPanel extends JPanel implements Initializable
     JPanel banner = new JPanel();
     banner.setBackground(this.colorChooser.getColor());
 
-    this.colorChooser.getSelectionModel().addChangeListener(
-      new ColorUpdater(banner));
+    this.addChangeListener(new ColorUpdater(banner::setBackground));
 
     this.setLayout(new BorderLayout(1, 2));
     this.add(panels[this.colorSystem], BorderLayout.CENTER);
     this.add(banner, BorderLayout.NORTH);
     this.setOpaque(true);
+  }
+  
+  /**
+   * Adds a change listener to the underlying {@code JColorChooser}.
+   * @param cl The new change listener.
+   * @see javax.swing.colorchooser.ColorSelectionModel#addChangeListener(ChangeListener)
+   */
+  public void addChangeListener(ChangeListener cl)
+  {
+    this.colorChooser.getSelectionModel().addChangeListener(cl);
+  }
+  
+  /**
+   * Removes a change listener to the underlying {@code JColorChooser}.
+   * @param cl The old change listener.
+   * @see javax.swing.colorchooser.ColorSelectionModel#removeChangeListener(ChangeListener)
+   */
+  public void removeChangeListener(ChangeListener cl)
+  {
+    this.colorChooser.getSelectionModel().removeChangeListener(cl);
   }
   
   /**
@@ -165,35 +185,38 @@ public class ColorChooserPanel extends JPanel implements Initializable
   }
   
   /**
-   * Updates the banner up top using the underlying
+   * Updates any color using the underlying
    * {@link #colorChooser chooser's} current color.
    * @author C. William Oswald
    * @version 0.0.1
    * @since JTalker 0.1.5
    */
-  protected class ColorUpdater implements ChangeListener
+  public class ColorUpdater implements ChangeListener
   {
-    private JPanel banner;
-    
+    private Colorizer colorizer;
     /**
-     * Constructs an updater that updates the given banner.
-     * @param banner The banner to update.
+     * Constructs an updater that updates a given colorizer. This will call the
+     * {@code Colorizer}'s
+     * {@link com.coswald.jtalker.gui.Colorizer#setColor(Color) setColor} inside
+     * of the {@link #stateChanged(ChangeEvent) stateChange} method.
+     * @param colorizer The banner to update.
      */
-    public ColorUpdater(JPanel banner)
+    public ColorUpdater(Colorizer colorizer)
     {
-      this.banner = banner;
+      this.colorizer = colorizer;
     }
     
     /**
-     * Updates the given banner to the given color. This method is called 
+     * Updates the given colorizer to the given color. This method is called 
      * whenever the {@code JColorChooser} switches a color.
      * @param e Unused.
      * @see com.coswald.jtalker.gui.ColorChooserPanel#colorChooser
+     * @see com.coswald.jtalker.gui.Colorizer
      */
     @Override
     public void stateChanged(ChangeEvent e)
     {
-      this.banner.setBackground(colorChooser.getColor());
+      this.colorizer.setColor(colorChooser.getColor());
     }
   }
 }
