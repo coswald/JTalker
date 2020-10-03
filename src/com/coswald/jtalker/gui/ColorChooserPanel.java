@@ -49,8 +49,14 @@ import javax.swing.event.ChangeListener;
  * manually enter a specific value. We felt this busied the screen, and was
  * unnecessary. The main purpose of this GUI is to get a
  * {@link java.awt.Color Color}, and we do so via the
- * {@link #getColor() getColor} method. When you display the panel, it will look
- * like this:</p>
+ * {@link #getColor() getColor} method. However, we also allow the addition of
+ * {@code ColorUpdater}s, which will automatically update the color of the given
+ * {@code Colorizer} when the underlying {@code JColorChooser}s color has been
+ * updated. <b>Note:</b> For some reason, you must add this component as the
+ * main component of the UI. This is not a huge deal, but it will not display
+ * unless it is positioned at {@code BorderLayout.CENTER} or is a main component
+ * of a {@code GridBagLayout}. When you display the panel, it will look like
+ * this:</p>
  * <p align="center">
  * <img src="https://github.com/coswald/JTalker/blob/master/docs/img/ColorChooserPanel.png" alt="ColorChooserPanel" width="400">
  * </p>
@@ -59,7 +65,8 @@ import javax.swing.event.ChangeListener;
  * @since JTalker 0.1.5
  * @see javax.swing.JColorChooser
  */
-public class ColorChooserPanel extends JPanel implements Initializable
+public class ColorChooserPanel extends JPanel implements Initializable,
+  Colorizer
 {
   private static final long serialVersionUID = 3145007523589759584L;
   
@@ -156,6 +163,20 @@ public class ColorChooserPanel extends JPanel implements Initializable
   }
   
   /**
+   * Sets the {@code Color} of the underlying {@code JColorChooser}. This is a
+   * wrapper method for the
+   * {@link javax.swing.JColorChooser#setColor(Color) setColor} method of
+   * the {@code JColorChooser} class.
+   * @param c The new color.
+   * @see javax.swing.JColorChooser#setColor(Color)
+   */
+  @Override
+  public void setColor(Color c)
+  {
+    this.colorChooser.setColor(c);
+  }
+  
+  /**
    * Adds a change listener to the underlying {@code JColorChooser}.
    * @param cl The new change listener.
    * @see javax.swing.colorchooser.ColorSelectionModel#addChangeListener(ChangeListener)
@@ -163,6 +184,18 @@ public class ColorChooserPanel extends JPanel implements Initializable
   public void addChangeListener(ChangeListener cl)
   {
     this.colorChooser.getSelectionModel().addChangeListener(cl);
+  }
+  
+  /**
+   * Adds a {@code ColorUpdater} to this {@code ColorChooserPanel}. This is just
+   * a way to avoid ugly code like this: <br/>
+   * <p align="center">
+   * {@code ccp.addChangeListener(ccp.new ColorUpdater(ssp::setColor));}
+   * </p>
+   */
+  public void addColorUpdater(Colorizer colorizer)
+  {
+    this.addChangeListener(new ColorUpdater(colorizer));
   }
   
   /**
@@ -186,12 +219,15 @@ public class ColorChooserPanel extends JPanel implements Initializable
   
   /**
    * Updates any color using the underlying
-   * {@link #colorChooser chooser's} current color.
+   * {@link #colorChooser chooser's} current color. If you wish to use this
+   * class within a {@code ColorChosoerPanel}, use
+   * {@link com.coswald.jtalker.gui.ColorChooserPanel#addColorUpdater(Colorizer) this}
+   * method.
    * @author C. William Oswald
    * @version 0.0.1
    * @since JTalker 0.1.5
    */
-  public class ColorUpdater implements ChangeListener
+  protected class ColorUpdater implements ChangeListener
   {
     private Colorizer colorizer;
     /**

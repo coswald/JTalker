@@ -91,5 +91,13 @@ public final class GUIConstants
    */
   public static final int COLOR_SLIDER_WIDTH = 25;
   
+  /**
+   * The size of the stroke on the {@code CanvasPanel}. The value is {@value},
+   * and shouldn't be a value that is too large. See
+   * {@link java.awt.BasicStroke this} class to understand the usage of this
+   * number in its construction.
+   * @see com.coswald.jtalker.gui.CanvasPanel
+   */
+  public static final int STROKE_SIZE = 5;
   private GUIConstants() {}
 }
