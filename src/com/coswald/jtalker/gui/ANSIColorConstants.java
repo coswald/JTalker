@@ -153,6 +153,17 @@ public final class ANSIColorConstants
   public static final String ESCAPE_TEXT = "\u001B";
   
   /**
+   * The end of the escape sequence. This is also known as "m".
+   */
+  public static final String ESCAPE_TEXT_END = "m";
+  
+  private static final int BACKGROUND_NUMBER = 4;
+  
+  private ANSIColorConstants()
+  {
+  }
+  
+  /**
    * Transforms a character code as a string into an actual {@code Color}. This
    * is done by exact comparison: the parameter given must only be the escape
    * code. By default, {@link #BRIGHT_WHITE white} will be returned. 
@@ -241,9 +252,10 @@ public final class ANSIColorConstants
    */
   public static boolean isBackgroundEscape(String ansiColor)
   {
-    return ansiColor.indexOf("m", 0) > 1 ? 
+    return ansiColor.indexOf(ESCAPE_TEXT_END, 0) > 1 ? 
       Character.getNumericValue(
-        ansiColor.charAt(ansiColor.indexOf("m", 0) - 2)) == 4 : false;
+        ansiColor.charAt(ansiColor.indexOf(ESCAPE_TEXT_END, 0) - 2)) ==
+        BACKGROUND_NUMBER : false;
   }
   
   /**
@@ -260,6 +272,4 @@ public final class ANSIColorConstants
   {
     return (ESCAPE_TEXT + "[0m").equals(ansiColor);
   }
-  
-  private ANSIColorConstants() { }
 }

@@ -42,6 +42,14 @@ import javax.swing.text.StyleContext;
  * {@link com.coswald.jtalker.gui.ANSIColorConstants constants} class to see
  * what codes have been interpreted by this pane. This also makes the pane
  * ignore word wrap.</p>
+ * <p>The method for which ANSI color codes can be derived was mainly received
+ * by
+ * <a href="https://stackoverflow.com/questions/6899282/ansi-colors-in-java-swing-text-fields">this</a>
+ * stack overflow question. However, we have since improved on it. When you
+ * display the panel, it will look like this:</p>
+ * <p align="center">
+ * <img src="https://github.com/coswald/JTalker/blob/master/docs/img/ColoredTextPane.png" alt="ColorChooserPanel" width="800">
+ * </p></p>
  * @author C. William Oswald
  * @version 0.0.1
  * @since JTalker 0.1.5
@@ -86,7 +94,8 @@ public class ColoredTextPane extends JTextPane
   }
   
   /**
-   * {@inheritDoc}
+   * Returns {@code true} if a viewport should always force the width of this
+   * {@code Scrollable} to match the width of the viewport.
    * @return {@code false} if the {@code ComponentUI}'s preferred width is less
    *   than or equal to the parents width, {@code true} otherwise.
    */
@@ -108,11 +117,15 @@ public class ColoredTextPane extends JTextPane
   public void append(String s)
   {
     this.setEditable(true);
-    int aPos = 0; //currentColor char position in addString
-    int aIndex = 0; //index of next Escape sequence
-    int mIndex = 0; //index of "m" terminating Escape sequence
+    //currentColor char position in addString
+    int aPos = 0;
+    //index of next Escape sequence
+    int aIndex = 0;
+    //index of "m" terminating Escape sequence
+    int mIndex = 0;
     String tmpString = "";
-    boolean stillSearching = true; //true until no more Escape sequences
+    //true until no more Escape sequences
+    boolean stillSearching = true;
     String addString = this.remaining + s;
     this.remaining = "";
     
@@ -141,7 +154,7 @@ public class ColoredTextPane extends JTextPane
       while(stillSearching)
       {
         //find the end of the escape sequence
-        mIndex = addString.indexOf("m", aPos); 
+        mIndex = addString.indexOf(ANSIColorConstants.ESCAPE_TEXT_END, aPos); 
         if(mIndex < 0)
         {
           //the buffer ends halfway through the ansi string!
@@ -175,7 +188,8 @@ public class ColoredTextPane extends JTextPane
           tmpString = addString.substring(aPos, addString.length());
           this.append(tmpString, this.currentColor, this.isBackground);
           stillSearching = false;
-          continue; //jump out of loop early, as the whole string has been sent
+          //jump out of loop early, as the whole string has been sent
+          continue;
         }
 
         //there is another escape sequence, so send part of the string
