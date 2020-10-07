@@ -37,5 +37,5 @@ public interface TextPipe
    * Sends the given text along the pipe.
    * @param text The text to send along the pipe.
    */
-  public void sendText(String text);
+  public abstract void sendText(String text);
 }

@@ -213,6 +213,12 @@ public class CanvasPanel extends JPanel implements Initializable, Colorizer
       
       curves.add(newCurve);
       colors.add(currentColor);
+      
+      /*
+       * Repaint, becuase if the curve is a single point, it will not be drawn
+       * until the next curve is created.
+       */
+      repaint(0, 0, getWidth(), getHeight());
     }
     
     /**

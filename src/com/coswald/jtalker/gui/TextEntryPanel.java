@@ -144,6 +144,16 @@ public class TextEntryPanel extends JPanel implements Initializable, KeyListener
   }
   
   /**
+   * Requests that this {@code TextEntryPanel} gets the input focus. This will
+   * call the underlying {@code JTextField}'s {@code requestFocus} method.
+   */
+  @Override
+  public void requestFocus()
+  {
+    this.entryField.requestFocus();
+  }
+  
+  /**
    * Adds a {@code TextUpdater} to this {@code TextEntryPanel}.
    * @param pipe The text pipe to make a {@code TextUpdater} out of.
    */
@@ -180,7 +190,8 @@ public class TextEntryPanel extends JPanel implements Initializable, KeyListener
     
     /**
      * Sends a string to the given text pipe. This method is called 
-     * whenever the send {@link #sendButton button} is pressed.
+     * whenever the send {@link #sendButton button} is pressed. However, it will
+     * not send text along the pipe if the text is just an empty string.
      * @param e Unused.
      * @see com.coswald.jtalker.gui.TextEntryPanel#sendButton
      * @see com.coswald.jtalker.gui.TextPipe
@@ -188,8 +199,11 @@ public class TextEntryPanel extends JPanel implements Initializable, KeyListener
     @Override
     public void actionPerformed(ActionEvent e)
     {
-      this.pipe.sendText(entryField.getText());
-      entryField.setText("");
+      if(!"".equals(entryField.getText()))
+      {
+        this.pipe.sendText(entryField.getText());
+        entryField.setText("");
+      }
     }
   }
 }

@@ -49,7 +49,7 @@ import javax.swing.text.StyleContext;
  * display the pane, it will look like this:</p>
  * <p align="center">
  * <img src="https://github.com/coswald/JTalker/blob/master/docs/img/ColoredTextPane.png" alt="ColorChooserPanel" width="800">
- * </p></p>
+ * </p>
  * @author C. William Oswald
  * @version 0.0.1
  * @since JTalker 0.1.5
