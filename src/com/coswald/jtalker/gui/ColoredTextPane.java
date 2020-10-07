@@ -46,7 +46,7 @@ import javax.swing.text.StyleContext;
  * by
  * <a href="https://stackoverflow.com/questions/6899282/ansi-colors-in-java-swing-text-fields">this</a>
  * stack overflow question. However, we have since improved on it. When you
- * display the panel, it will look like this:</p>
+ * display the pane, it will look like this:</p>
  * <p align="center">
  * <img src="https://github.com/coswald/JTalker/blob/master/docs/img/ColoredTextPane.png" alt="ColorChooserPanel" width="800">
  * </p></p>

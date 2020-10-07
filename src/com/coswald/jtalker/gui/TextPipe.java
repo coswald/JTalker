@@ -1,5 +1,5 @@
 /*
- * Colorizer.java
+ * TextPipe.java
  * 
  * Copyright 2020 Coved W. Oswald <coswald@uni.edu>
  * 
@@ -21,24 +21,21 @@
 
 package com.coswald.jtalker.gui;
 
-import java.awt.Color;
-
 /**
- * <p>Changes a color to another given color. This allows an implementation 
- * independent way for a class to allow a color to be changed. This method can
- * be used to send a method as a parameter, like in
- * {@link com.coswald.jtalker.gui.ColorChooserPanel.ColorUpdater this} class. 
+ * <p>Sends text along from one are to another. This allows an implementation 
+ * independent way for a class to send text between two areas. This interface
+ * can be used to send a method as a parameter, like in
+ * {@link com.coswald.jtalker.gui.TextEntryPanel this} class. 
  * @author C. William Oswald
  * @version 0.0.1
  * @since JTalker 0.1.5
- * @see #setColor(Color)
- * @see java.awt.Color
+ * @see #sendText(String)
  */
-public interface Colorizer
+public interface TextPipe
 {
   /**
-   * Changes the color to the given color.
-   * @param c The new color.
+   * Sends the given text along the pipe.
+   * @param text The text to send along the pipe.
    */
-  public abstract void setColor(Color c);
+  public void sendText(String text);
 }

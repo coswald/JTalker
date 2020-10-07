@@ -109,5 +109,17 @@ public final class GUIConstants
   public static final Font DEFAULT_FONT =
     new Font(Font.MONOSPACED, Font.PLAIN, 16);
   
+  /**
+   * The width of the send button in the JTalker application. This is currently
+   * set to {@value}.
+   */
+  public static final int SEND_BUTTON_WIDTH = 75;
+  
+  /**
+   * The height of the send button in the JTalker application. This is currently
+   * set to {@value}.
+   */
+  public static final int SEND_BUTTON_HEIGHT = 40;
+  
   private GUIConstants() {}
 }

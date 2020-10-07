@@ -192,6 +192,7 @@ public class ColorChooserPanel extends JPanel implements Initializable,
    * <p align="center">
    * {@code ccp.addChangeListener(ccp.new ColorUpdater(ssp::setColor));}
    * </p>
+   * @param colorizer The colorizer make a {@code ColorUpdater} out of.
    */
   public void addColorUpdater(Colorizer colorizer)
   {
@@ -230,12 +231,13 @@ public class ColorChooserPanel extends JPanel implements Initializable,
   protected class ColorUpdater implements ChangeListener
   {
     private Colorizer colorizer;
+    
     /**
      * Constructs an updater that updates a given colorizer. This will call the
      * {@code Colorizer}'s
      * {@link com.coswald.jtalker.gui.Colorizer#setColor(Color) setColor} inside
      * of the {@link #stateChanged(ChangeEvent) stateChange} method.
-     * @param colorizer The banner to update.
+     * @param colorizer The colorizer to update.
      */
     public ColorUpdater(Colorizer colorizer)
     {
