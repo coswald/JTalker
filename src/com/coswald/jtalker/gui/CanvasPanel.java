@@ -49,8 +49,7 @@ import javax.swing.JPanel;
  * multiple line strokes and colors). When the canvas is drawn it looks like
  * this:</p>
  * <p align="center">
- * <img src="https://github.com/coswald/JTalker/blob/master/docs/img/CanvasPanel.png" alt="ColorChooserPanel" width="400">
- * </p>
+ * <img src="../../../../img/CanvasPanel.png" alt="" width="400"></p>
  * @author C. William Oswald
  * @version 0.0.1
  * @since JTalker 0.1.5

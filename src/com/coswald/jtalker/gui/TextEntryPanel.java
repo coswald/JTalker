@@ -48,8 +48,7 @@ import javax.swing.JTextField;
  * of new pipes via the {@link #addTextUpdater(TextPipe)} method. When you
  * display the panel, it will look like this:</p>
  * <p align="center">
- * <img src="https://github.com/coswald/JTalker/blob/master/docs/img/TextEntryPanel.png" alt="ColorChooserPanel" width="800">
- * </p>
+ * <img src="../../../../img/TextEntryPanel.png" alt="" width="800"></p>
  * @author C. William Oswald
  * @version 0.0.1
  * @since JTalker 0.1.5

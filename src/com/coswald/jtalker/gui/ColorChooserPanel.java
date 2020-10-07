@@ -58,8 +58,7 @@ import javax.swing.event.ChangeListener;
  * of a {@code GridBagLayout}. When you display the panel, it will look like
  * this:</p>
  * <p align="center">
- * <img src="https://github.com/coswald/JTalker/blob/master/docs/img/ColorChooserPanel.png" alt="ColorChooserPanel" width="400">
- * </p>
+ * <img src="../../../../img/ColorChooserPanel.png" alt="" width="400"></p>
  * @author C. William Oswald
  * @version 0.0.1
  * @since JTalker 0.1.5

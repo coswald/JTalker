@@ -48,8 +48,7 @@ import javax.swing.text.StyleContext;
  * stack overflow question. However, we have since improved on it. When you
  * display the pane, it will look like this:</p>
  * <p align="center">
- * <img src="https://github.com/coswald/JTalker/blob/master/docs/img/ColoredTextPane.png" alt="ColorChooserPanel" width="800">
- * </p>
+ * <img src="../../../../img/ColoredTextPane.png" alt="" width="800"></p>
  * @author C. William Oswald
  * @version 0.0.1
  * @since JTalker 0.1.5
@@ -165,16 +164,25 @@ public class ColoredTextPane extends JTextPane
         else
         {
           tmpString = addString.substring(aPos, mIndex + 1);
-          this.currentColor = ANSIColorConstants.isReset(tmpString) ?
-            ANSIColorConstants.COLOR_RESET :
-            ANSIColorConstants.getANSIColor(tmpString);
-          isBackground = ANSIColorConstants.isBackgroundEscape(tmpString);
-          
-          if(ANSIColorConstants.isReset(tmpString))
+          if(ANSIColorConstants.isEscape(tmpString))
           {
-            this.isBackground = false;
-            this.append("", ANSIColorConstants.COLOR_RESET, false);
-            this.append("", ANSIColorConstants.BACKGROUND_RESET, true);
+            this.currentColor = ANSIColorConstants.isReset(tmpString) ?
+              ANSIColorConstants.COLOR_RESET :
+              ANSIColorConstants.getANSIColor(tmpString);
+            isBackground = ANSIColorConstants.isBackgroundEscape(tmpString);
+          
+            if(ANSIColorConstants.isReset(tmpString))
+            {
+              this.isBackground = false;
+              this.append("", ANSIColorConstants.COLOR_RESET, false);
+              this.append("", ANSIColorConstants.BACKGROUND_RESET, true);
+            }
+          }
+          else
+          {
+            //The escape sequence was received, but did not have a valid code
+            mIndex = aPos;
+            //skip the escape text, but still process all the gobbldy gook
           }
         }
         

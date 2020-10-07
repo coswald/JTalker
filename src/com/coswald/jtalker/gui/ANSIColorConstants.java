@@ -22,6 +22,7 @@
 package com.coswald.jtalker.gui;
 
 import java.awt.Color;
+import java.util.regex.Pattern;
 
 /**
  * <p>A set of descriptions for specific color constants within the ANSI 
@@ -32,6 +33,10 @@ import java.awt.Color;
  * understandable). This class also provides a method for allowing the
  * transcription of an escape string to a Java {@code Color} via the
  * {@link #getANSIColor(String) getANSIColor} method.</p>
+ * <p>We only allow two types of ANSI color codes: dark colors and bold dark
+ * colors (i. e. 30 - 37, 40 - 47 and 1;30 - 1:37, 1;40 - 1;47). We did not feel
+ * it was necessary or worth our time to include the whole standard; this is
+ * subject to change.</p>
  * @author C. William Oswald
  * @version 0.0.1
  * @since JTalker 0.1.5
@@ -158,9 +163,47 @@ public final class ANSIColorConstants
   public static final String ESCAPE_TEXT_END = "m";
   
   private static final int BACKGROUND_NUMBER = 4;
+  private static final int MAX_ESCAPE_NUMBER = 109;
   
   private ANSIColorConstants()
   {
+  }
+  
+  /**
+   * Tests whether the given string is an escape sequence that we recognize.
+   * @param test The string to test.
+   * @return {@code true} if it is an escape sequence we know, {@code false}
+   *  otherwise.
+   */
+  public static boolean isEscape(String test)
+  {
+    if(test == null)
+    {
+      return false;
+    }
+    
+    if(test.length() <= 8 && test.length() >= 4 &&
+      ESCAPE_TEXT_END.equals(Character.toString(test.charAt(test.length() - 1)))
+      && ESCAPE_TEXT.equals(Character.toString(test.charAt(0))) &&
+      "[".equals(Character.toString(test.charAt(1))))
+    {
+      String toTest = test.substring(2, test.length() - 1);
+      if(toTest.contains(";") && toTest.split(";").length == 2)
+      {
+        String[] twoParts = toTest.split(";");
+        return twoParts[0].length() == 1 && 
+          ANSIColorConstants.innerTest(twoParts[0]) &&
+          ANSIColorConstants.innerTest(twoParts[1]);
+      }
+      else
+      {
+        return ANSIColorConstants.innerTest(toTest);
+      }
+    }
+    else
+    {
+      return false;
+    }
   }
   
   /**
@@ -271,5 +314,35 @@ public final class ANSIColorConstants
   public static boolean isReset(String ansiColor)
   {
     return (ESCAPE_TEXT + "[0m").equals(ansiColor);
+  }
+  
+  private static boolean innerTest(String test)
+  {
+    Pattern digitsOnly = Pattern.compile("\\d+");
+    if(digitsOnly.matcher(test).matches())
+    {
+      try
+      {
+        int num = Integer.parseInt(test);
+        if(num < MAX_ESCAPE_NUMBER)
+        {
+          return true;
+        }
+        else
+        {
+          return false;
+        }
+      }
+      catch(NumberFormatException nfe)
+      {
+        //NEVER HAPPENS
+        nfe.printStackTrace();
+        return false;
+      }
+    }
+    else
+    {
+      return false;
+    }
   }
 }
