@@ -21,6 +21,8 @@
 
 package com.coswald.jtalker.gui;
 
+import java.awt.Font;
+
 /**
  * <p>A set of descriptions for specific GUI constants within a JTalker
  * application. The list of constants are continually growing, so instead of
@@ -99,5 +101,13 @@ public final class GUIConstants
    * @see com.coswald.jtalker.gui.CanvasPanel
    */
   public static final int STROKE_SIZE = 5;
+  
+  /**
+   * The default font used by the JTalker application. This is currently set to
+   * a monospaced font with a font size of 16, and is plain.
+   */
+  public static final Font DEFAULT_FONT =
+    new Font(Font.MONOSPACED, Font.PLAIN, 16);
+  
   private GUIConstants() {}
 }
