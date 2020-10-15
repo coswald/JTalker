@@ -162,6 +162,24 @@ public class TextEntryPanel extends JPanel implements Initializable, KeyListener
   }
   
   /**
+   * Returns the {@code JTextField} that is used for text entry.
+   * @return The {@code JTextField} that is used for text entry.
+   */
+  public JTextField getTextField()
+  {
+    return this.entryField;
+  }
+  
+  /**
+   * Returns the {@code JButton} that is used for sending text.
+   * @return The {@code JButton} that is used for sending text.
+   */
+  public JButton getButton()
+  {
+    return this.sendButton;
+  }
+  
+  /**
    * Updates any text pipe using the underlying text
    * {@link #entryField field's} current text. If you wish to use this
    * class within a {@code TextEntryPanel}, use

@@ -121,5 +121,32 @@ public final class GUIConstants
    */
   public static final int SEND_BUTTON_HEIGHT = 40;
   
+  /**
+   * The URL of the help message, as a string. This is currently set to
+   * {@value}.
+   */
+  public static final String HELP_URL =
+    "https://github.com/coswald/JTalker/blob/master/README.md";
+  
+  /**
+   * The URL of the website of JTalker, as a string. This is currently set to
+   * {@value}.
+   */
+  public static final String WEBSITE_URL = "https://github.com/coswald/JTalker";
+  
+  /**
+   * The URL of the report bug website for the JTalker application. This is
+   * currently set to {@value}.
+   */
+  public static final String REPORT_URL =
+    "https://github.com/coswald/JTalker/issues/new";
+  
+  /**
+   * The URL of the about message, as a string. This is currently set to
+   * {@value}.
+   */
+  public static final String ABOUT_URL =
+    "https://github.com/coswald/JTalker/blob/master/README.md";
+  
   private GUIConstants() {}
 }

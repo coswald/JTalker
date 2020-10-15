@@ -31,7 +31,6 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.awt.print.PageFormat;
 import java.awt.print.Printable;
-import java.awt.print.PrinterException;
 
 import javax.swing.JTextPane;
 import javax.swing.plaf.ComponentUI;
@@ -122,6 +121,15 @@ public class ColoredTextPane extends JTextPane implements Printable
       parent.getSize().width) : true;
   }
   
+  /**
+   * Prints the given page. This will use the current graphics on the pane and
+   * draw them on a buffered image, which will be sent to the printer service.
+   * This <b>will not</b> print everything that has been appended to the colored
+   * text pane; it will only print what is currently displayed.
+   * @param g The graphics to draw on (what will be printed).
+   * @param format The format to use when transforming the graphics.
+   * @param pageIndex The page number (determines which page to print).
+   */
   @Override
   public int print(Graphics g, PageFormat format, int pageIndex)
   {
@@ -136,11 +144,11 @@ public class ColoredTextPane extends JTextPane implements Printable
      * Get the line height, lines per page, and number of lines 
      */
     int lineHeight = (g.getFontMetrics(GUIConstants.DEFAULT_FONT)).getHeight();
-    int linesPerPage = ((int)format.getImageableHeight() / lineHeight);
+    int linesPerPage = (int)format.getImageableHeight() / lineHeight;
     int textLines = ((this.typed.toString()).split("\n")).length;
     int documentHeight = 
-      ((((lineHeight * textLines) / (int)format.getImageableHeight()) + 1) *
-      (int)format.getImageableHeight());
+      (((lineHeight * textLines) / (int)format.getImageableHeight()) + 1) *
+      (int)format.getImageableHeight();
     
     //TODO: this will only print lines to a certain point. This needs fixed.
     BufferedImage document = new BufferedImage((int)format.getImageableWidth(),
@@ -164,6 +172,37 @@ public class ColoredTextPane extends JTextPane implements Printable
       /* tell the caller that this page is part of the printed document */
       return PAGE_EXISTS;
     }
+  }
+  
+  /**
+   * Sets the text of this {@code ColoredTextPane}, which is expected to be in
+   * the format of the content type of this editor. To see the exact
+   * exact documentation, visit
+   * {@link javax.swing.JEditorPane#setText(String) this} link. We needed to
+   * override this method due to our coloring of the pane. With this in mind, 
+   * we do call {@code super.setText(text)} at the end of our {@code setText}
+   * method. However, we have to ensure that the color state is only preserved
+   * to our current state of color (not what our selection contains).
+   * @param text The new text to be set; if {@code null} the old text will be
+   *  deleted.
+   */
+  @Override
+  public void setText(String text)
+  {
+    /*
+     * We have to deselect the text we may have selected, as this will cause
+     * the colored text pane to draw the next text with the selected color
+     * attributes.
+     */
+    int end = this.getSelectionEnd();
+    this.setSelectionStart(end);
+    this.setSelectionEnd(end);
+    //Okay do all the hard work for us.
+    super.setText(text);
+    this.typed.delete(0, this.typed.length());
+    this.typed.append(text);
+    //Send the reset symbol, just in case.
+    this.append(ANSIColorConstants.ESCAPE_TEXT + "[0m"); 
   }
   
   /**
@@ -304,9 +343,8 @@ public class ColoredTextPane extends JTextPane implements Printable
     if(this.colorMode != colorMode)
     {
       this.colorMode = colorMode;
-      this.setText("");
       String history = this.getHistory();
-      this.typed.delete(0, this.typed.length());
+      this.setText("");
       this.append(history);
     }
   }
