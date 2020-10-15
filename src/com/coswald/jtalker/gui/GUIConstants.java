@@ -145,8 +145,7 @@ public final class GUIConstants
    * The URL of the about message, as a string. This is currently set to
    * {@value}.
    */
-  public static final String ABOUT_URL =
-    "https://github.com/coswald/JTalker/blob/master/README.md";
+  public static final String ABOUT_URL = HELP_URL;
   
   private GUIConstants() {}
 }

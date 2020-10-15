@@ -27,22 +27,6 @@ import com.coswald.jtalker.gui.ColoredTextPane;
 import com.coswald.jtalker.gui.GUIConstants;
 import com.coswald.jtalker.gui.TextEntryPanel;
 
-import javax.imageio.ImageIO;
-import javax.print.attribute.HashPrintRequestAttributeSet;
-import javax.print.attribute.PrintRequestAttributeSet;
-import javax.swing.KeyStroke;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JRadioButtonMenuItem;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.filechooser.FileNameExtensionFilter;
-
 import java.awt.Desktop;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
@@ -64,6 +48,22 @@ import java.net.URISyntaxException;
 import java.util.Map;
 import java.util.TreeMap;
 
+import javax.imageio.ImageIO;
+import javax.print.attribute.HashPrintRequestAttributeSet;
+import javax.print.attribute.PrintRequestAttributeSet;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JRadioButtonMenuItem;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.KeyStroke;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 /**
  * <p>A menu bar for the JTalker application. This menu bar has five menus: 
  * file, edit, view, settings, and help. Each menu is separated by the functions
@@ -81,7 +81,7 @@ public class JTalkerMenuBar extends JMenuBar implements Initializable
 {
   /**
    * A map between the name of a menu item and the keystroke that activates it.
-   * @see #createMenuItem(String, int, int, int, ActionListener);
+   * @see #createMenuItem(String, int, int, int, ActionListener)
    * @see #createButtonMenuItem(String, boolean, int, int, int, ActionListener)
    */
   protected static Map<String, KeyStroke> SHORTCUTS =
@@ -184,7 +184,7 @@ public class JTalkerMenuBar extends JMenuBar implements Initializable
   
   private static ActionListener openWebpage(String uri)
   {
-    return (e) ->
+    return e ->
     {
       try
       {
@@ -410,6 +410,7 @@ public class JTalkerMenuBar extends JMenuBar implements Initializable
    */
   public void openKeyboardShortcuts()
   {
+    final String title = "Keyboard Shortcuts";
     String[][] records = new String[SHORTCUTS.size()][2];
     int i = 0;
     for(String name : SHORTCUTS.keySet())
@@ -437,11 +438,11 @@ public class JTalkerMenuBar extends JMenuBar implements Initializable
       records[i++][1] = value;
     }
     JTable table = new JTable(records,
-      new String[] {"Action", "Keyboard Shortcut"});
+      new String[] {"Action", title});
     table.setEnabled(false);
     table.getTableHeader().setReorderingAllowed(false);
     JOptionPane.showMessageDialog(this.frame, new JScrollPane(table),
-      "Keyboard Shortcuts", JOptionPane.PLAIN_MESSAGE);
+      title, JOptionPane.PLAIN_MESSAGE);
   }
   
   private void initFile()
@@ -458,20 +459,20 @@ public class JTalkerMenuBar extends JMenuBar implements Initializable
     file.addSeparator();
     JMenuItem saveChat = JTalkerMenuBar.createMenuItem("Save Chat As...",
       KeyEvent.VK_S, ActionEvent.CTRL_MASK, KeyEvent.VK_S,
-      (e) -> this.saveChat());
+      e -> this.saveChat());
     file.add(saveChat);
     JMenuItem saveCanvas = JTalkerMenuBar.createMenuItem("Save Canvas As...",
       KeyEvent.VK_S, ActionEvent.CTRL_MASK | ActionEvent.ALT_MASK,
-      KeyEvent.VK_V, (e) -> this.saveCanvas());
+      KeyEvent.VK_V, e -> this.saveCanvas());
     file.add(saveCanvas);
     file.addSeparator();
     JMenuItem printChat = JTalkerMenuBar.createMenuItem("Print...",
       KeyEvent.VK_P, ActionEvent.CTRL_MASK, KeyEvent.VK_P,
-      (e) -> this.printChat());
+      e -> this.printChat());
     file.add(printChat);
     file.addSeparator();
     JMenuItem quit = JTalkerMenuBar.createMenuItem("Quit", KeyEvent.VK_F4,
-      ActionEvent.ALT_MASK, KeyEvent.VK_Q, (e) -> frame.dispose());
+      ActionEvent.ALT_MASK, KeyEvent.VK_Q, e -> frame.dispose());
     file.add(quit);
     this.add(file);
   }
@@ -482,23 +483,23 @@ public class JTalkerMenuBar extends JMenuBar implements Initializable
     edit.setMnemonic(KeyEvent.VK_E);
     //setup copy (so we can doClick)
     JMenuItem copy = JTalkerMenuBar.createMenuItem("Copy", KeyEvent.VK_C,
-      ActionEvent.CTRL_MASK, KeyEvent.VK_O, (e) -> this.systemCopy());
+      ActionEvent.CTRL_MASK, KeyEvent.VK_O, e -> this.systemCopy());
     JMenuItem cut = JTalkerMenuBar.createMenuItem("Cut", KeyEvent.VK_X,
-      ActionEvent.CTRL_MASK, KeyEvent.VK_C, (e) -> this.systemCut());
+      ActionEvent.CTRL_MASK, KeyEvent.VK_C, e -> this.systemCut());
     //Add cut first, then copy (which we already JTalkerMenuBar.created)
     edit.add(cut);
     edit.add(copy);
     JMenuItem paste = JTalkerMenuBar.createMenuItem("Paste", KeyEvent.VK_V,
-      ActionEvent.CTRL_MASK, KeyEvent.VK_P, (e) -> this.systemPaste());
+      ActionEvent.CTRL_MASK, KeyEvent.VK_P, e -> this.systemPaste());
     edit.add(paste);
     JMenuItem selectAll = JTalkerMenuBar.createMenuItem("Select All",
       KeyEvent.VK_A, ActionEvent.CTRL_MASK, KeyEvent.VK_A,
-      (e) -> this.selectColoredTextPane());
+      e -> this.selectColoredTextPane());
     edit.add(selectAll);
     edit.addSeparator();
     JMenuItem clear = JTalkerMenuBar.createMenuItem("Clear Text",
       KeyEvent.VK_X, ActionEvent.CTRL_MASK | ActionEvent.ALT_MASK,
-      KeyEvent.VK_T, (e) -> this.coloredTextPane.setText(""));
+      KeyEvent.VK_T, e -> this.coloredTextPane.setText(""));
     edit.add(clear);
     this.add(edit);
   }
@@ -510,10 +511,10 @@ public class JTalkerMenuBar extends JMenuBar implements Initializable
     JRadioButtonMenuItem coloredTextPaneText =
       JTalkerMenuBar.createButtonMenuItem("Show Colored Text", true,
       KeyEvent.VK_F6, 0, KeyEvent.VK_C,
-      (e) -> coloredTextPane.setColorMode(!coloredTextPane.getColorMode()));
+      e -> coloredTextPane.setColorMode(!coloredTextPane.getColorMode()));
     view.add(coloredTextPaneText);
     JRadioButtonMenuItem fullscreen = JTalkerMenuBar.createButtonMenuItem(
-      "Fullscreen", false, KeyEvent.VK_F11, 0, KeyEvent.VK_F, (e) ->
+      "Fullscreen", false, KeyEvent.VK_F11, 0, KeyEvent.VK_F, e ->
     {
       if(e.getSource() instanceof JRadioButtonMenuItem)
       {
@@ -542,15 +543,16 @@ public class JTalkerMenuBar extends JMenuBar implements Initializable
   
   private void initHelp()
   {
-    JMenu help = new JMenu("Help");
+    final String title = "Help";
+    JMenu help = new JMenu(title);
     help.setMnemonic(KeyEvent.VK_H);
-    JMenuItem helpMenu = JTalkerMenuBar.createMenuItem("Help", KeyEvent.VK_F1,
+    JMenuItem helpMenu = JTalkerMenuBar.createMenuItem(title, KeyEvent.VK_F1,
       0, KeyEvent.VK_E, JTalkerMenuBar.openWebpage(GUIConstants.HELP_URL));
     help.add(helpMenu);
     JMenuItem keyBoardShortcuts = JTalkerMenuBar.createMenuItem(
       "Keyboard Shortcuts", KeyEvent.VK_F1,
       ActionEvent.CTRL_MASK | ActionEvent.SHIFT_MASK, KeyEvent.VK_K,
-      (e) -> this.openKeyboardShortcuts());
+      e -> this.openKeyboardShortcuts());
     help.add(keyBoardShortcuts);
     JMenuItem debug = JTalkerMenuBar.createMenuItem("Debug Messages",
       KeyEvent.VK_F7, 0, KeyEvent.VK_D, null);
