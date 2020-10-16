@@ -22,10 +22,14 @@
 package com.coswald.jtalker.gui;
 
 import com.coswald.jtalker.Initializable;
+import com.coswald.jtalker.TextInputStream;
 import com.coswald.jtalker.gui.CanvasPanel;
 import com.coswald.jtalker.gui.ColoredTextPane;
+import com.coswald.jtalker.gui.ColoredTextPaneStream;
 import com.coswald.jtalker.gui.GUIConstants;
 import com.coswald.jtalker.gui.TextEntryPanel;
+import com.coswald.jtalker.net.ServerClientConstants;
+import com.coswald.jtalker.net.TCPClient;
 
 import java.awt.Desktop;
 import java.awt.Toolkit;
@@ -43,6 +47,7 @@ import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Map;
@@ -94,7 +99,10 @@ public class JTalkerMenuBar extends JMenuBar implements Initializable
   private TextEntryPanel textEntryPanel;
   private CanvasPanel canvasPanel;
   
+  private TextInputStream textPipe;
+  private ColoredTextPaneStream serverOut;
   
+  private boolean connected = false;
   
   /**
    * Initializes the menu bar. The four components that are needed for the menu
@@ -113,6 +121,9 @@ public class JTalkerMenuBar extends JMenuBar implements Initializable
     this.coloredTextPane = coloredTextPane;
     this.textEntryPanel = textEntryPanel;
     this.canvasPanel = canvasPanel;
+    
+    this.textPipe = new TextInputStream("");
+    this.serverOut = new ColoredTextPaneStream(this.coloredTextPane);
   }
   
   /**
@@ -234,6 +245,9 @@ public class JTalkerMenuBar extends JMenuBar implements Initializable
     this.initView();
     this.initSettings();
     this.initHelp();
+    
+    //Add the ability for the text updating
+    this.textEntryPanel.addTextUpdater(s -> this.textPipe.add(s + "\n"));
   }
   
   /**
@@ -447,16 +461,60 @@ public class JTalkerMenuBar extends JMenuBar implements Initializable
       title, JOptionPane.PLAIN_MESSAGE);
   }
   
+  /**
+   * Opens a connection to a remote server.
+   */
+  public void openConnection()
+  {
+    if(!this.connected)
+    {
+      String host = JOptionPane.showInputDialog(this.frame, "Enter a host:",
+        "127.0.0.1");
+      String identifier = JOptionPane.showInputDialog(this.frame,
+        "Enter an identifier:", "steve");
+      TCPClient c = new TCPClient(this.textPipe,
+        new PrintStream(this.serverOut), identifier, host,
+        ServerClientConstants.TCP_PORT);
+      c.init();
+      (new Thread(c)).start();
+      this.connected = true;
+    }
+    else
+    {
+      JOptionPane.showMessageDialog(this.frame, "You are currently connected!",
+        "Connection interrupted", JOptionPane.INFORMATION_MESSAGE);
+    }
+  }
+  
+  /**
+   * Closes the connection to the remove server.
+   */
+  public void closeConnection()
+  {
+    if(this.connected)
+    {
+      this.textPipe.add(ServerClientConstants.EXIT_MESSAGE + "\n");
+      this.connected = false;
+    }
+    else
+    {
+      JOptionPane.showMessageDialog(this.frame,
+        "You are currently disconnected!", "Disconnection interrupted",
+        JOptionPane.INFORMATION_MESSAGE);
+    }
+  }
+  
   private void initFile()
   {
     JMenu file = new JMenu("File");
     file.setMnemonic(KeyEvent.VK_F);
     JMenuItem openConnection = JTalkerMenuBar.createMenuItem("Open Connection",
-      KeyEvent.VK_O, ActionEvent.CTRL_MASK, KeyEvent.VK_O, null);
+      KeyEvent.VK_O, ActionEvent.CTRL_MASK, KeyEvent.VK_O,
+      e -> this.openConnection());
     file.add(openConnection);
     JMenuItem closeConnection = JTalkerMenuBar.createMenuItem(
       "Close Connection", KeyEvent.VK_W, ActionEvent.CTRL_MASK, KeyEvent.VK_C,
-      null);
+      e -> this.closeConnection());
     file.add(closeConnection);
     file.addSeparator();
     JMenuItem saveChat = JTalkerMenuBar.createMenuItem("Save Chat As...",

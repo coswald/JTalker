@@ -94,6 +94,15 @@ public class JTalkerFrame extends JFrame implements Initializable
   }
   
   /**
+   * Constructs a frame with brand new underlying components.
+   */
+  public JTalkerFrame()
+  {
+    this(new ColoredTextPane(), new TextEntryPanel(), new CanvasPanel(),
+      new ColorChooserPanel());
+  }
+  
+  /**
    * Initializes the {@link #initializableComponents sub-components} and then
    * itself. This will set everything in its correct position, ensuring
    * dimensions for the canvas and scaling for the chat panel (to ensure that
@@ -150,6 +159,6 @@ public class JTalkerFrame extends JFrame implements Initializable
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.setSize(GUIConstants.JTALKER_WIDTH, GUIConstants.JTALKER_HEIGHT);
     //request that the focus be drawn to the text entry panel
-    //this.textEntry.requestFocus();
+    this.textEntry.requestFocus();
   }
 }

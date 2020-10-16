@@ -41,27 +41,6 @@ import java.util.Arrays;
 public class TextInputStream extends ByteArrayInputStream
 {
   /**
-   * <p>An array of bytes that was provided by the creator of the steam.
-   * Elements {@code buf[0]} through {@code buf[count - 1]} are the only bytes
-   * that can ever be read from the stream; element {@code buf[pos]} is the next
-   * byte to be read.</p>
-   * <p>When we {@link #add(String) add} a string to the stream, this byte array
-   * is modified to reflect the addition (by copying over the contents of the
-   * old array and adding it to the new array).</p>
-   */
-  protected byte[] buf = super.buf;
-  
-  /**
-   * <p>The index one greater than the last valid character in the input stream
-   * buffer. This value should always be nonnegative and not larger than the
-   * length of {@code buf}. It is one greater than the position of the last byte
-   * within {@code buf} that can ever be read from the input stream buffer.</p>
-   * <p>When we {@link #add(String) add} a string to the stream, this count is
-   * modified to reflect the new size of the byte {@link #buf array}.</p>
-   */
-  protected int count = super.count;
-  
-  /**
    * Creates a {@code TextInputStream} so that it uses {@code buf} as its buffer
    * array. The buffer array is not copied. The initial value of {@code pos} is
    * 0 and the initial value of {@code count} is the length of {@code buf}.

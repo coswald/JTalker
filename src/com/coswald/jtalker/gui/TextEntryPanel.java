@@ -108,7 +108,7 @@ public class TextEntryPanel extends JPanel implements Initializable, KeyListener
     this.add(this.sendButton, BorderLayout.EAST);
     
     //Okay. So we want to clear text no matter what, so add that actionlistener
-    this.sendButton.addActionListener(e -> this.entryField.setText(""));
+    //this.sendButton.addActionListener(e -> this.entryField.setText(""));
   }
   
   /**
@@ -122,7 +122,8 @@ public class TextEntryPanel extends JPanel implements Initializable, KeyListener
   {
     if(e.getKeyCode() == KeyEvent.VK_ENTER)
     {
-      sendButton.doClick();
+      this.sendButton.doClick();
+      this.entryField.setText("");
     }
   }
   
@@ -160,17 +161,21 @@ public class TextEntryPanel extends JPanel implements Initializable, KeyListener
    */
   public void addTextUpdater(TextPipe pipe)
   {
+    /*
     ActionListener[] actions = this.sendButton.getActionListeners();
     for(ActionListener action : actions)
     {
       this.sendButton.removeActionListener(action);
     }
     this.sendButton.addActionListener(actions[0]);
+    */
     this.sendButton.addActionListener(new TextUpdater(pipe));
+    /*
     for(int i = 1; i < actions.length; i++)
     {
       this.sendButton.addActionListener(actions[i]);
     }
+    */
   }
   
   /**

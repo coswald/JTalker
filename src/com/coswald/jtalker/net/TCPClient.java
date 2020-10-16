@@ -229,7 +229,7 @@ public class TCPClient implements Closeable, Initializable, Runnable
     {
       String line = "";
       while(this.running && 
-        !line.equalsIgnoreCase(ServerClientConstants.EXIT_MESSAGE))
+        !ServerClientConstants.EXIT_MESSAGE.equalsIgnoreCase(line))
       {
         //System.out.print(this.identifier + ": ");
         line = this.input.readLine();
