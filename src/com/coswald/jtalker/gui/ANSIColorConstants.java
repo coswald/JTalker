@@ -324,14 +324,7 @@ public final class ANSIColorConstants
       try
       {
         int num = Integer.parseInt(test);
-        if(num < MAX_ESCAPE_NUMBER)
-        {
-          return true;
-        }
-        else
-        {
-          return false;
-        }
+        return num < MAX_ESCAPE_NUMBER;
       }
       catch(NumberFormatException nfe)
       {

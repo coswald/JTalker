@@ -36,7 +36,7 @@ import java.util.Arrays;
  * @author C. William Oswald
  * @version 0.0.1
  * @since JTalker 0.2.0
- * @see java.io.ByteArrayInputStream;
+ * @see java.io.ByteArrayInputStream
  */
 public class TextInputStream extends ByteArrayInputStream
 {

@@ -152,7 +152,9 @@ public class CanvasPanel extends JPanel implements Initializable, Colorizer
     /**
      * Constructs a {@code CurveCreator}.
      */
-    public CurveCreator() { }
+    public CurveCreator()
+    {
+    }
     
     /**
      * Invoked when the mouse button has been clicked (pressed and released) on
@@ -161,7 +163,9 @@ public class CanvasPanel extends JPanel implements Initializable, Colorizer
      * @param e The mouse event.
      */
     @Override
-    public void mouseClicked(MouseEvent e) { }
+    public void mouseClicked(MouseEvent e)
+    {
+    }
 
     /**
      * Invoked when a mouse button is pressed on a component and then dragged.
@@ -181,7 +185,9 @@ public class CanvasPanel extends JPanel implements Initializable, Colorizer
      * @param e The mouse event.
      */
     @Override
-    public void mouseEntered(MouseEvent e) { }
+    public void mouseEntered(MouseEvent e)
+    {
+    }
 
     /**
      * Invoked when the mouse exits a component. This method is unimplemented
@@ -189,14 +195,18 @@ public class CanvasPanel extends JPanel implements Initializable, Colorizer
      * @param e The mouse event.
      */
     @Override
-    public void mouseExited(MouseEvent e) { }
+    public void mouseExited(MouseEvent e)
+    {
+    }
     
     /**
      * Invoked when the mouse button has been moved on a component (with no
      * buttons no down). This method is unimplemented (i. e. nothing currently
      * happens).
      */
-    public void mouseMoved(MouseEvent e) { }
+    public void mouseMoved(MouseEvent e)
+    {
+    }
     
     /**
      * Invoked when a mouse button has been pressed on a component. This will
@@ -226,6 +236,8 @@ public class CanvasPanel extends JPanel implements Initializable, Colorizer
      * @param e The mouse event.
      */
     @Override
-    public void mouseReleased(MouseEvent e) { }
+    public void mouseReleased(MouseEvent e)
+    {
+    }
   }
 }

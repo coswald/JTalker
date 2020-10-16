@@ -363,10 +363,12 @@ public class ColoredTextPane extends JTextPane implements Printable
     StyleContext sc = StyleContext.getDefaultStyleContext();
     AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY,
       background ? StyleConstants.Background : StyleConstants.Foreground, c);
-    
-    int len = this.getDocument().getLength();//same value as getText().length();
-    this.setCaretPosition(len); //place caret at the end (with no selection)
+    //same value as getText().length();
+    int len = this.getDocument().getLength();
+    //place caret at the end (with no selection)
+    this.setCaretPosition(len);
     this.setCharacterAttributes(aset, false);
-    this.replaceSelection(s); //there is no selection, so inserts at caret
+    //there is no selection, so inserts at caret
+    this.replaceSelection(s);
   }
 }

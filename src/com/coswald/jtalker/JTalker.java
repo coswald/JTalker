@@ -34,6 +34,10 @@ import javax.swing.SwingUtilities;
  */
 public class JTalker
 {
+  private JTalker()
+  {
+  }
+  
   /**
    * The main method for the application.
    * @param args Unused
