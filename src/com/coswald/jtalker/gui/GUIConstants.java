@@ -147,5 +147,21 @@ public final class GUIConstants
    */
   public static final String ABOUT_URL = HELP_URL;
   
+  /**
+   * The width and height of the canvas within the JTalker application. Its
+   * current value is set at {@value}.
+   */
+  public static final int CANVAS_SIZE = 255;
+  
+  /**
+   * The height of the JTalker application. This is currently set to {@value}.
+   */
+  public static final int JTALKER_HEIGHT = 640;
+  
+  /**
+   * The width of the JTalker applicaiton. This is currently set to {@value}.
+   */
+  public static final int JTALKER_WIDTH = 1200;
+  
   private GUIConstants() {}
 }

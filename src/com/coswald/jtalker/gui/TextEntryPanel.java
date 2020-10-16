@@ -77,6 +77,8 @@ public class TextEntryPanel extends JPanel implements Initializable, KeyListener
    */
   public TextEntryPanel()
   {
+    this.entryField = new JTextField();
+    this.sendButton = new JButton("Send");
   }
   
   /**
@@ -93,9 +95,6 @@ public class TextEntryPanel extends JPanel implements Initializable, KeyListener
   public void init()
   {
     this.setLayout(new BorderLayout());
-    
-    this.entryField = new JTextField();
-    this.sendButton = new JButton("Send");
     entryField.setFont(GUIConstants.DEFAULT_FONT);
     
     this.entryField.addKeyListener(this);
