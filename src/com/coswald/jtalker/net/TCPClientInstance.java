@@ -95,7 +95,11 @@ public class TCPClientInstance implements Closeable, Initializable, Runnable
    * output stream to the {@code ServerOutputStream} associated with the server.
    * It will then write a boolean ({@code true}) to the output stream and listen
    * for a unique identifier. Once the identifier is received, it is ready for
+<<<<<<< HEAD
    * listening within the {@link #run() run} method.
+=======
+   * listening within the {@link run() run} method.
+>>>>>>> master
    */
   @Override
   public final void init()

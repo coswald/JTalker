@@ -36,10 +36,11 @@ import java.util.Scanner;
 public final class ClientTest
 {
   private static final int SLEEP_TIME = 5000;
+  
   private static final String USER_PROMPT = "Give me a username: ";
   private static final String IP_PROMPT = "Give me an IP: ";
   private static final String YES = "y";
-  
+
   private ClientTest()
   {
   }
@@ -63,6 +64,7 @@ public final class ClientTest
     TCPClient c = new TCPClient(identifier, host,
       ServerClientConstants.TCP_PORT);
     c.init();
+    
     String yesno = YES;
     while(yesno.equalsIgnoreCase(YES))
     {

@@ -234,7 +234,12 @@ shortcuts to navigate code.
 
 ### Field, class, and method declarations
 
+<<<<<<< HEAD
 #### Modifier order
+=======
+##### Modifier order
+
+>>>>>>> master
 We follow the
 [Java Language Specification](http://docs.oracle.com/javase/specs/) for modifier
 ordering (sections
@@ -317,7 +322,11 @@ suggests that a class is too complex and should be broken apart.
     // Good.
     String value;
 
+<<<<<<< HEAD
 ### Space pad operators and equals
+=======
+### Space pad operators and equals.
+>>>>>>> master
 
     :::java
     // Bad.
@@ -533,6 +542,7 @@ change, like a spell check).
 #### Import ordering
 Imports are grouped by top-level package, with blank lines separating groups.
 Static imports are grouped in the same way, in a section below traditional
+<<<<<<< HEAD
 imports. However, we advise agains using static imports. Note that all imports
 are in alphabetical order.
 
@@ -546,11 +556,27 @@ are in alphabetical order.
     
     import javax.*
 
+=======
+imports. However, we advise agains using static imports.
+
+    :::java
+    import java.*
+    import javax.*
+
+    import scala.*
+
+    import com.*
+
+>>>>>>> master
     import net.*
 
     import org.*
 
+<<<<<<< HEAD
     import scala.*
+=======
+    import com.twitter.*
+>>>>>>> master
     
     // Acceptable, but we do not prefer it.
     import static *
@@ -1103,6 +1129,10 @@ use try/finally to guarantee resource symmetry.
       }
     }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
 ### Clean code
 
 #### Disambiguate
@@ -1143,6 +1173,10 @@ change the types used internally without affecting users or peripheral code.
       Iterable<User> fetchUsers(String query);
     }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
 #### Always use type parameters
 Java 5 introduced support for
 [generics](http://docs.oracle.com/javase/tutorial/java/generics/index.html).
@@ -1338,7 +1372,11 @@ and
 [Objects.hashCode()](https://docs.oracle.com/javase/7/docs/api/java/lang/Object.html#hashCode())
 make it very easy to follow these contracts.
 
+<<<<<<< HEAD
 ### Premature optimization is the root of all evil
+=======
+### Premature optimization is the root of all evil.
+>>>>>>> master
 Donald Knuth is a smart guy, and he had a few things to
 [say](http://c2.com/cgi/wiki?PrematureOptimization) on the topic.
 
@@ -1524,7 +1562,11 @@ down, consider registering with
 [ShutdownRegistry](https://github.com/twitter/commons/blob/master/src/java/com/twitter/common/application/ShutdownRegistry.java).
 
 ### Avoid unnecessary code
+<<<<<<< HEAD
 #### Superfluous temporary variables
+=======
+#### Superfluous temporary variables.
+>>>>>>> master
 
     :::java
     // Bad.
@@ -1536,7 +1578,11 @@ down, consider registering with
     // Good.
     return fetchStrings();
 
+<<<<<<< HEAD
 #### Unneeded assignment
+=======
+#### Unneeded assignment.
+>>>>>>> master
 
     :::java
     // Bad.
