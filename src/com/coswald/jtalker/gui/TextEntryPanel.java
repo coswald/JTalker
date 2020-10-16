@@ -106,6 +106,9 @@ public class TextEntryPanel extends JPanel implements Initializable, KeyListener
     
     this.add(this.entryField, BorderLayout.CENTER);
     this.add(this.sendButton, BorderLayout.EAST);
+    
+    //Okay. So we want to clear text no matter what, so add that actionlistener
+    this.sendButton.addActionListener(e -> this.entryField.setText(""));
   }
   
   /**
@@ -157,7 +160,17 @@ public class TextEntryPanel extends JPanel implements Initializable, KeyListener
    */
   public void addTextUpdater(TextPipe pipe)
   {
+    ActionListener[] actions = this.sendButton.getActionListeners();
+    for(ActionListener action : actions)
+    {
+      this.sendButton.removeActionListener(action);
+    }
+    this.sendButton.addActionListener(actions[0]);
     this.sendButton.addActionListener(new TextUpdater(pipe));
+    for(int i = 1; i < actions.length; i++)
+    {
+      this.sendButton.addActionListener(actions[i]);
+    }
   }
   
   /**
@@ -218,7 +231,13 @@ public class TextEntryPanel extends JPanel implements Initializable, KeyListener
       if(!"".equals(entryField.getText()))
       {
         this.pipe.sendText(entryField.getText());
-        entryField.setText("");
+        //entryField.setText("");
+        /*
+         * We originally cleared the text from the text panel, but this
+         * disabled any other text updaters (because the text was cleared). As
+         * such, we added an action to clear the text at the end of the actions,
+         * and made sure that order was preserved.
+         */
       }
     }
   }

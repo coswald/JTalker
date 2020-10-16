@@ -233,7 +233,10 @@ public class TCPClient implements Closeable, Initializable, Runnable
       {
         //System.out.print(this.identifier + ": ");
         line = this.input.readLine();
-        this.output.writeUTF(line);
+        if(line != null)
+        {
+          this.output.writeUTF(line);
+        }
       }
       this.close();
     }

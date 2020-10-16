@@ -94,6 +94,8 @@ public class JTalkerMenuBar extends JMenuBar implements Initializable
   private TextEntryPanel textEntryPanel;
   private CanvasPanel canvasPanel;
   
+  
+  
   /**
    * Initializes the menu bar. The four components that are needed for the menu
    * bar to work effectively are the {@code JFrame}, {@code ColoredTextPane},
