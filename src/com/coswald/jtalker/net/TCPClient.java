@@ -21,6 +21,9 @@
 
 package com.coswald.jtalker.net;
 
+import com.coswald.jtalker.Initializable;
+import com.coswald.jtalker.net.ServerClientConstants;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.Closeable;
@@ -33,9 +36,6 @@ import java.io.PrintStream;
 import java.net.Socket;
 import java.net.SocketException;
 import java.net.UnknownHostException;
-
-import com.coswald.jtalker.Initializable;
-import com.coswald.jtalker.net.ServerClientConstants;
 
 /**
  * <p>A TCP client for the JTalker application. This class defines everything
@@ -229,11 +229,14 @@ public class TCPClient implements Closeable, Initializable, Runnable
     {
       String line = "";
       while(this.running && 
-        !line.equalsIgnoreCase(ServerClientConstants.EXIT_MESSAGE))
+        !ServerClientConstants.EXIT_MESSAGE.equalsIgnoreCase(line))
       {
         //System.out.print(this.identifier + ": ");
         line = this.input.readLine();
-        this.output.writeUTF(line);
+        if(line != null)
+        {
+          this.output.writeUTF(line);
+        }
       }
       this.close();
     }

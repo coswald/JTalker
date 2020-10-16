@@ -40,7 +40,7 @@ source:
 docs: source
 	@mkdir -p docs
 	@echo "Making docs..."
-	@$(JD) -sourcepath $(SRCDIR) -d $(DOCDIR) -use -splitIndex -windowtitle $(WTITLE) -doctitle $(DTITLE) -header $(HEADER) -bottom $(BOTTOM) -linkoffline https://docs.oracle.com/en/java/javase/15/docs/api/ https://docs.oracle.com/en/java/javase/15/docs/api -html5 -author -version @sources
+	@$(JD) -sourcepath $(SRCDIR) -d $(DOCDIR) -use -splitIndex -windowtitle $(WTITLE) -doctitle $(DTITLE) -header $(HEADER) -bottom $(BOTTOM) -linkoffline https://docs.oracle.com/en/java/javase/15/docs/api/ https://docs.oracle.com/en/java/javase/15/docs/api -html5 -author -version --frames @sources
 	@echo "Adding favicon..."
 	@./lib/add-favicon ./docs ./img/JTalker.ico && make clean
 

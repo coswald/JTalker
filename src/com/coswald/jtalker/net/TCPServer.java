@@ -21,6 +21,10 @@
 
 package com.coswald.jtalker.net;
 
+import com.coswald.jtalker.Initializable;
+import com.coswald.jtalker.net.ServerOutputStream;
+import com.coswald.jtalker.net.TCPClientInstance;
+
 import java.io.Closeable;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -29,10 +33,6 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.util.concurrent.Executors; 
 import java.util.concurrent.ThreadPoolExecutor;
-
-import com.coswald.jtalker.Initializable;
-import com.coswald.jtalker.net.TCPClientInstance;
-import com.coswald.jtalker.net.ServerOutputStream;
 
 /**
  * <p>A TCP server for the JTalker application. This class defines everything

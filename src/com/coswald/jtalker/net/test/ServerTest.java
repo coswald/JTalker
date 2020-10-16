@@ -21,8 +21,8 @@
 
 package com.coswald.jtalker.net.test;
 
-import com.coswald.jtalker.net.TCPServer;
 import com.coswald.jtalker.net.ServerClientConstants;
+import com.coswald.jtalker.net.TCPServer;
 
 /**
  * Tests {@link com.coswald.jtalker.net.TCPServer TCPServer}. This will test the
